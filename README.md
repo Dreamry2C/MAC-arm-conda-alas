@@ -1,4 +1,4 @@
-# Mac ARM 上安装与配置 AzurLaneAutoScript 指南
+# Mac ARM 上使用 conda 安装与配置 AzurLaneAutoScript 指南
 
 ## 1. 安装 Homebrew
 >  HomeBrew是macOS上的包管理器，安装步骤如下：
