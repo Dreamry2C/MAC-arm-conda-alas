@@ -9,15 +9,14 @@
 ```
 >  如果遇到下载困难，可以自行设置代理或者使用国内源安装。
 
-3. **配置环境变量**：执行bash环境的命令：<br>
+3. **配置环境变量**：分别执行bash环境的命令：<br>
+>  mac默认的是zshrc，看个人习惯使用
 ``` bash
   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
 
   eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
-然后运行
-``` source ~/.bashrc```
-以激活环境
+　　然后运行``` source ~/.bash_profile```以激活环境
 
 4. 验证安装：输入`brew --version`检查版本，确认安装成功
 
@@ -48,7 +47,7 @@
 输入`conda --version`检查版本，确认安装成功。
 查看是否安装成功。
 
->  上面已执行过 source ~/.bashrc，一般无需再次配置环境变量
+>  上面已执行过 source ~/.bash_profile，一般无需再次配置环境变量
 
 ---
 
@@ -177,7 +176,7 @@ dependencies:
   - llvm-openmp=18.1.3=hcd81f8e_0
   - lz4=4.3.2=py38h80987f9_0
   - lz4-c=1.9.4=h313beb8_0
-  - mxnet=1.6.0
+  - mxnet=1.5.1=hca03da5_0
   - mysql=5.7.24=ha71a6ea_2
   - ncurses=6.4.20240210=h078ce10_0
   - nettle=3.9.1=h40ed0f5_0
@@ -299,8 +298,9 @@ dependencies:
 
 2. 如果部分依赖无法安装，出现类似 No matching distribution found for XXX 的报错:
    - 在命令行使用 conda install <无法安装的包名> 独立安装，例如`conda install python-graphviz==0.8.4`
-   - 安装成功后，打开 environment.yml 文件，将对应依赖用 # 注释掉，例如 `#- python-graphviz==0.8.4`<br>
-    保存后执行:
+   - 安装成功后，打开 environment.yml 文件，将对应依赖用 # 注释掉，例如 `#- python-graphviz==0.8.4`
+
+　　保存后执行:
 ``` bash
   conda env update --name alas --file environment.yml
 ```
@@ -311,13 +311,13 @@ dependencies:
 
 ## 7. 配置 config/deploy.yaml
 
-1. 在终端运行以下命令，分别查看 git、python、adb 的安装路径:
+1. 在终端分别运行以下命令，分别查看 git、python、adb 的安装路径:
 ``` bash
   which git
   which python
   which adb
 ```
-   记录下它们的路径。
+　　记录下它们的路径。
 
 2. 打开 alas 目录下的 config/deploy.yaml 文件，找到:
 ``` yaml
@@ -333,7 +333,7 @@ Adb:
   # Filepath of ADB executable
   AdbExecutable: /usr/bin/adb  # 把 which adb 得到的地址填这里
 ```
-　把得到的地址分别填进去
+　　把得到的地址分别填进去
 
 ---
 
