@@ -310,8 +310,13 @@ dependencies:
 ---
 
 ## 7. 配置 config/deploy.yaml
-
-1. 在终端分别运行以下命令，分别查看 git、python、adb 的安装路径:
+1. 输入
+```bash
+   cp deploy.template-cn.yaml deploy.yaml
+```
+　　重命名deploy.yaml文件。
+  
+2. 在终端分别运行以下命令，分别查看 git、python、adb 的安装路径:
 ``` bash
   which git
   which python
@@ -319,21 +324,21 @@ dependencies:
 ```
 　　记录下它们的路径。
 
-2. 打开 alas 目录下的 config/deploy.yaml 文件，找到:
+3. 打开 alas 目录下的 config/deploy.yaml 文件，找到:
 ``` yaml
 Git:
   # Filepath of git executable
-  GitExecutable: /usr/bin/git  # 把 which git 得到的地址填这里
+  GitExecutable: ./toolkit/Git/mingw64/bin/git.exe  # 把 which git 得到的地址替换这里，例如/usr/bin/git
 
 Python:
   # Filepath of python executable
-  PythonExecutable: /usr/local/bin/python  # 把 which python 得到的地址填这里
+  PythonExecutable: ./toolkit/python.exe  # 把 which python 得到的地址替换这里
 
 Adb:
   # Filepath of ADB executable
-  AdbExecutable: /usr/bin/adb  # 把 which adb 得到的地址填这里
+  AdbExecutable: ./toolkit/Lib/site-packages/adbutils/binaries/adb.exe  # 把 which adb 得到的地址替换这里
 ```
-　　把得到的地址分别填进去
+　　把得到的地址分别替换进去
 
 ---
 
