@@ -34,8 +34,8 @@
 ## 3. 安装 Miniforge
 >  Miniforge为conda环境的轻量级发行版，安装步骤如下：
 1. **下载安装包：** <br>
-  访问 [GitHub页面](https://github.com/conda-forge/miniforge) 找到MaxOSX arm版本，或直接访问 
-[最新发布页面](https://github.com/conda-forge/miniforge/releases/latest/download/) 下载，更推荐后者
+  访问 [GitHub页面](https://github.com/conda-forge/miniforge) 找到MacOSX arm版本，或 
+[直接下载](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)，更推荐后者
 2. **运行安装脚本：** <br>
   下载完成后，在下载目录中打开终端，运行:
 ``` bash
