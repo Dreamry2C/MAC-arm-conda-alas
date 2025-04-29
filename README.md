@@ -68,7 +68,7 @@
 >  environment.yml文件定义了Alas的依赖环境，创建步骤：
 
 - 在Alas目录下新建名为environment.yml的文件，内容如下：
-``` 
+``` yaml
 name: alas
 channels:
   - anaconda
@@ -311,8 +311,8 @@ dependencies:
 
 ## 7. 配置 config/deploy.yaml
 1. 输入
-```bash
-   cp deploy.template-cn.yaml deploy.yaml
+``` bash
+   cp config/deploy.template-cn.yaml config/deploy.yaml
 ```
 　　重命名deploy.yaml文件。
   
