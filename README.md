@@ -1,10 +1,10 @@
 # MAC-arm-conda-alas
 
-在 Mac ARM 中使用 conda 安装与配置 AzurLaneAutoScript 指南
+  在 Mac ARM 中使用 conda 安装与配置 AzurLaneAutoScript 指南
 
 ## 1. 安装 HomeBrew
 
-- HomeBrew 是 macOS 的包管理器，安装步骤如下：
+  HomeBrew 是 macOS 的包管理器
 
 1. 打开 **macOS** 的 **终端（Terminal）**
 
@@ -14,13 +14,13 @@
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   ```
 
-  - 如果遇到下载困难，可以自行设置代理或者使用国内源安装。
+- 如果遇到下载困难，可以自行设置代理或者使用国内源安装。
 
 3. **配置环境变量**
 
      - mac 中默认是 zshrc，本文使用 bash_profile
 
-逐行执行下列命令
+  逐行执行下列命令
 
   ```bash
   # 创建 .bash_profile
@@ -39,9 +39,9 @@
 
 ## 2. 使用 HomeBrew 安装 git 和 adb
 
-- git 和 adb 是 Alas 运行所需工具
+   - git 和 adb 是 Alas 运行所需工具
 
-运行下列命令
+  运行下列命令
 
   ```bash
   brew install git android-platform-tools
@@ -51,7 +51,7 @@
 
 ## 3. 安装 Miniforge
 
-- Miniforge 是 conda 环境的轻量级发行版
+  - Miniforge 是 conda 环境的轻量级发行版
 
 1. **下载安装包** 
    点击[直接下载](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)下载安装包
@@ -66,13 +66,13 @@
   bash Miniforge3-MacOSX-arm64.sh
   ```
 
-根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
+  根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
 
 3. **验证安装**
 
-输入`conda --version`检查版本，确认安装成功。
+  输入`conda --version`检查版本，确认安装成功。
 
-- 在步骤1.中已执行过 source ~/.bash_profile，一般无需再次配置环境变量
+   - 在步骤1.中已执行过 source ~/.bash_profile，一般无需再次配置环境变量
 
 ---
 
@@ -368,22 +368,27 @@ dependencies:
   which adb
   ```
 
-记录下它们的路径。
+记录下它们的路径
+
+- 若未找到可使用`source ~/.bash_profile`激活环境后再试
 
 3. 打开 alas 目录下的 config/deploy.yaml 文件，找到:
 
   ```yaml
   Git:
     # Filepath of git executable
-    GitExecutable: ./toolkit/Git/mingw64/bin/git.exe # 把 which git 得到的地址替换这里，例如/usr/bin/git
+    GitExecutable: ./toolkit/Git/mingw64/bin/git.exe 
+    # 把 which git 得到的地址替换这里，例如/usr/bin/git
 
   Python:
     # Filepath of python executable
-    PythonExecutable: ./toolkit/python.exe # 把 which python 得到的地址替换这里
+    PythonExecutable: ./toolkit/python.exe 
+    # 把 which python 得到的地址替换这里
 
   Adb:
     # Filepath of ADB executable
-    AdbExecutable: ./toolkit/Lib/site-packages/adbutils/binaries/adb.exe # 把 which adb 得到的地址替换这里
+    AdbExecutable: ./toolkit/Lib/site-packages/adbutils/binaries/adb.exe 
+    # 把 which adb 得到的地址替换这里
   ```
 
 把得到的地址分别替换进去
@@ -401,18 +406,9 @@ dependencies:
 3. 运行 GUI  
    `python gui.py`
 
-4. 打开浏览器访问 `127.0.0.1:22267`，即可看到 Alas 的图形界面。
+4. 打开浏览器访问 `127.0.0.1:22267`，即可看到 Alas 的图形界面
 
-- 运行后，如果需要关闭浏览器，可以随时关掉，只要终端没关闭，Alas 就仍然在运行。
-  如果关闭终端，下次需再次输入以下命令：
-
-  ```bash
-  conda activate alas          # 激活alas环境
-  cd /Users/yourname/AzurLaneAutoScript  # 切换到你的alas目录，注意下地址需要更改
-  python gui.py
-  ```
-
-然后浏览器再访问 127.0.0.1:22267 即可。
+   - 运行后，如果需要关闭浏览器，可以随时关掉，只要终端没关闭，Alas 就仍然在运行。
 
 ---
 
@@ -422,7 +418,7 @@ dependencies:
 
 1. 创建脚本文件 run_alas.sh
 
-在终端输入`touch run_alas.sh` ，创建脚本文件
+  在终端输入`touch run_alas.sh` ，创建脚本文件
 
 2. 编辑脚本文件
 
@@ -445,8 +441,6 @@ dependencies:
 
 3. 修改脚本文件权限
 
-在终端中执行
-
   ```bash
   chmod +x run_alas.sh
   ```
@@ -457,15 +451,18 @@ dependencies:
   ./run_alas.sh
   ```
 
+5. 打开浏览器访问 `127.0.0.1:22267`，即可看到 Alas 的图形界面
+
 ## 换行符转换
 
-若使用远程桌面（WIN 到 MAC）部署脚本，请将脚本文件使用 dos2unix 换行符转换为 UNIX 标准。
+  若使用远程桌面（WIN 到 MAC）部署脚本，请将脚本文件使用 dos2unix 换行符转换为 UNIX 标准。
 
-```bash
+  ```bash
+  # 安装 dos2unix
   brew install dos2unix
-# 使用 dos2unix 转换换行符
+  # 使用 dos2unix 转换换行符
   dos2unix run_alas.sh
-```
+  ```
 
 ---
 
@@ -476,4 +473,4 @@ dependencies:
   export socks_proxy="socks://127.0.0.1:<port>"
   ```
 
-其中，<port> 为代理端口，例如 8080。
+  其中，<port> 为代理端口，例如 8080。
