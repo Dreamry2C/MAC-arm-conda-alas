@@ -1,38 +1,47 @@
-# Mac ARM 上使用 conda 安装与配置 AzurLaneAutoScript 指南
+# MAC-arm-conda-alas
 
-## 1. 安装 Homebrew
+在 Mac ARM 中使用 conda 安装与配置 AzurLaneAutoScript 指南
 
-> HomeBrew 是 macOS 上的包管理器，安装步骤如下：
+## 1. 安装 HomeBrew
+
+- HomeBrew 是 macOS 的包管理器，安装步骤如下：
 
 1. 打开 **macOS** 的 **终端（Terminal）**
-2. 运行下面的命令安装 **Homebrew**：<br>
+
+2. 运行下面的命令安装 **HomeBrew**
 
   ```bash
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   ```
 
-> 如果遇到下载困难，可以自行设置代理或者使用国内源安装。
+  - 如果遇到下载困难，可以自行设置代理或者使用国内源安装。
 
-3. **配置环境变量**：分别执行 bash 环境的命令：<br>
-   > mac 中默认的是 zshrc，看个人习惯使用，本文使用 bash_profile
+3. **配置环境变量**
+
+     - mac 中默认是 zshrc，本文使用 bash_profile
+
+逐行执行下列命令
 
   ```bash
+  # 创建 .bash_profile
   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
 
+  # 添加环境变量
   eval "$(/opt/homebrew/bin/brew shellenv)"
+
+  # 激活环境
+  source ~/.bash_profile
   ```
 
-然后运行` source ~/.bash_profile`以激活环境
-
-1. 验证安装：输入`brew --version`检查版本，确认安装成功
+4. 验证安装：输入`brew --version`检查版本，确认安装成功
 
 ---
 
-## 2. 安装 git 和 adb
+## 2. 使用 HomeBrew 安装 git 和 adb
 
-> git 和 adb 是 Alas 运行所需工具，通过 HomeBrew 安装：
+- git 和 adb 是 Alas 运行所需工具
 
-- 运行以下命令
+运行下列命令
 
   ```bash
   brew install git android-platform-tools
@@ -42,36 +51,40 @@
 
 ## 3. 安装 Miniforge
 
-> Miniforge 为 conda 环境的轻量级发行版，安装步骤如下：
+- Miniforge 是 conda 环境的轻量级发行版
 
-1. **下载安装包：** <br>
-   访问 [GitHub 页面](https://github.com/conda-forge/miniforge) 找到 MacOSX arm 版本，或
-   [直接下载](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)，更推荐后者
-2. **运行安装脚本：** <br>
-   下载完成后，在下载目录中打开终端，运行:
+1. **下载安装包** 
+   点击[直接下载](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)下载安装包
+
+2. **运行安装脚本**
+   下载完成后，在终端中运行下列代码
 
   ```bash
+  # 进入下载目录
+  cd downloads
+  # 运行安装脚本
   bash Miniforge3-MacOSX-arm64.sh
   ```
-根据提示，一路回车后再输入 `yes` 完成安装
 
-1. **验证安装：** <br>
-   输入`conda --version`检查版本，确认安装成功。
-   查看是否安装成功。
+根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
 
-> 上面已执行过 source ~/.bash_profile，一般无需再次配置环境变量
+3. **验证安装**
+
+输入`conda --version`检查版本，确认安装成功。
+
+- 在步骤1.中已执行过 source ~/.bash_profile，一般无需再次配置环境变量
 
 ---
 
 ## 4. 下载 AzurLaneAutoScript
 
-1. **在终端运行:**
+1. **在终端运行**
 
   ```bash
   git clone https://github.com/LmeSzinc/AzurLaneAutoScript/
   ```
 
-2. **切换到 Alas 目录:**
+2. **切换到 Alas 目录**
 
   ```bash
   cd AzurLaneAutoScript
@@ -81,14 +94,15 @@
 
 ## 5. 创建并配置 environment.yml 文件
 
-> environment.yml 文件定义了 Alas 的依赖环境，创建步骤：
+- environment.yml 文件定义了 Alas 的依赖环境
 
-- 在 Alas 目录下新建名为 [environment.yml](./environment.yml) 的文件，内容如下：
+1. 在 Alas 目录下新建名为 environment.yml 的文件，或从本仓库中下载 [environment.yml](./environment.yml)
+
   - 在终端输入 `touch environment.yml` 创建文件
 
 <details>
 <summary>
-environment.yml内容
+2. 打开文件environment.yml填入折叠内容
 </summary>
 
 ```yaml
@@ -317,9 +331,9 @@ dependencies:
 
 1. 在 alas 目录下运行:
 
-```bash
+  ```bash
   conda env create -f environment.yml
-```
+  ```
 
 2. 如果部分依赖无法安装，出现类似 No matching distribution found for XXX 的报错:
    - 在命令行使用 conda install <无法安装的包名> 独立安装，例如`conda install python-graphviz==0.8.4`
@@ -327,9 +341,9 @@ dependencies:
 
 保存后执行:
 
-```bash
+  ```bash
   conda env update --name alas --file environment.yml
-```
+  ```
 
 > 继续完成虚拟环境依赖的安装。如果再次遇到相同错误，重复以上步骤
 > 如遇网络问题，可尝试手动更换镜像源或使用代理
@@ -462,4 +476,4 @@ dependencies:
   export socks_proxy="socks://127.0.0.1:<port>"
   ```
 
-其中，<port> 为代理端口，例如 7890。
+其中，<port> 为代理端口，例如 8080。
