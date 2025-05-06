@@ -1,108 +1,124 @@
-# MAC-arm-conda-alas
+# MAC ARM Conda ALAS
 
-  在 Mac ARM 中使用 conda 安装与配置 AzurLaneAutoScript 指南
+> [!NOTE]
+> 本文默认您熟练掌握 CD 命令，并能链接 Github，且熟练掌握国内源设置
+
+> [!TIP]
+> 如果遇到下载问题，请自行设置代理或者使用国内源安装
+
+在 Mac ARM 中使用 Conda 安装与配置 AzurLaneAutoScript 的指南
+
+---
+
+> [!NOTE]
+> HomeBrew 是 macOS 的包管理器
 
 ## 1. 安装 HomeBrew
 
-  HomeBrew 是 macOS 的包管理器
+1. 打开**终端（Terminal）**
 
-1. 打开 **macOS** 的 **终端（Terminal）**
+2. 在终端中运行下列命令安装 HomeBrew
 
-2. 运行下面的命令安装 **HomeBrew**
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 
-  ```bash
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  ```
+> [!IMPORTANT]
+> macOS 中默认的环境变量是 .zshrc，本文使用 .bash_profile
 
-- 如果遇到下载困难，可以自行设置代理或者使用国内源安装。
+3. 配置环境变量，在终端中逐行运行下列命令
 
-3. **配置环境变量**
+```bash
+# 创建 .bash_profile
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
 
-     - mac 中默认是 zshrc，本文使用 bash_profile
+# 添加环境变量
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-  逐行执行下列命令
+# 激活环境变量
+source ~/.bash_profile
+```
 
-  ```bash
-  # 创建 .bash_profile
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
+4. 验证安装
 
-  # 添加环境变量
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+```bash
+brew --version
+```
 
-  # 激活环境
-  source ~/.bash_profile
-  ```
+---
 
-4. 验证安装：输入`brew --version`检查版本，确认安装成功
+> [!NOTE]
+> Git 和 Adb 是 ALAS 运行所需工具
+
+## 2. 使用 HomeBrew 安装 Git 和 Adb
+
+在终端中运行下列命令
+
+```bash
+brew install git android-platform-tools
+```
 
 ---
 
-## 2. 使用 HomeBrew 安装 git 和 adb
-
-   - git 和 adb 是 Alas 运行所需工具
-
-  运行下列命令
-
-  ```bash
-  brew install git android-platform-tools
-  ```
-
----
+> [!NOTE]
+> Miniforge 是 conda 环境的轻量级发行版
 
 ## 3. 安装 Miniforge
 
-  - Miniforge 是 conda 环境的轻量级发行版
+1. 点击[Miniforge3](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)，下载安装包
 
-1. **下载安装包** 
-   点击[直接下载](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)下载安装包
+2. 运行安装脚本，根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
 
-2. **运行安装脚本**
-   下载完成后，在终端中运行下列代码
+```bash
+# 进入下载目录
+cd downloads
+# 运行安装脚本
+bash Miniforge3-MacOSX-arm64.sh
+```
 
-  ```bash
-  # 进入下载目录
-  cd downloads
-  # 运行安装脚本
-  bash Miniforge3-MacOSX-arm64.sh
-  ```
+3. 验证安装
 
-  根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
+```bash
+conda --version
+```
 
-3. **验证安装**
-
-  输入`conda --version`检查版本，确认安装成功。
-
-   - 在步骤1.中已执行过 source ~/.bash_profile，一般无需再次配置环境变量
+> [!TIP]
+> 在步骤 1.中已执行过 source ~/.bash_profile，一般无需再次配置环境变量
 
 ---
 
 ## 4. 下载 AzurLaneAutoScript
 
-1. **在终端运行**
+1. 使用 Git 拉取 ALAS
 
-  ```bash
-  git clone https://github.com/LmeSzinc/AzurLaneAutoScript/
-  ```
+```bash
+git clone https://github.com/LmeSzinc/AzurLaneAutoScript/
+```
 
-2. **切换到 Alas 目录**
+2. **切换到 ALAS 目录**
 
-  ```bash
-  cd AzurLaneAutoScript
-  ```
+```bash
+cd AzurLaneAutoScript
+```
 
 ---
 
+> [!NOTE]
+> environment.yml 定义了 ALAS 的虚拟环境
+
 ## 5. 创建并配置 environment.yml 文件
 
-- environment.yml 文件定义了 Alas 的依赖环境
+1. 在终端中输入下列命令为 ALAS 目录下新建名为 `environment.yml` 的文件
 
-1. 在 Alas 目录下新建名为 environment.yml 的文件，或从本仓库中下载 [environment.yml](./environment.yml)
+```bash
+touch environment.yml
+```
 
-  - 在终端输入 `touch environment.yml` 创建文件
+- 或从本仓库中下载 [environment.yml](./environment.yml) 文件，后放置到 ALAS 目录下
 
 <details>
 <summary>
-2. 打开文件environment.yml填入折叠内容
+2. 打开文件 `environment.yml` 填入，被折叠的内容
 </summary>
 
 ```yaml
@@ -327,150 +343,173 @@ dependencies:
 
 ---
 
+> [!IMPORTANT]
+> 如果部分依赖无法安装，请重复执行步骤 6-2
+
 ## 6. 创建并配置虚拟环境
 
-1. 在 alas 目录下运行:
+1. 在 ALAS 目录下运行下列命令：
 
-  ```bash
-  conda env create -f environment.yml
-  ```
+```bash
+conda env create -f environment.yml
+```
 
-2. 如果部分依赖无法安装，出现类似 No matching distribution found for XXX 的报错:
-   - 在命令行使用 conda install <无法安装的包名> 独立安装，例如`conda install python-graphviz==0.8.4`
-   - 安装成功后，打开 environment.yml 文件，将对应依赖用 # 注释掉，例如 `#- python-graphviz==0.8.4`
+2. 如果部分依赖无法安装，出现类似 `No matching distribution found for XXX` 的报错:
 
-保存后执行:
+- 在命令行使用 `conda install <无法安装的包名>` 独立安装，例如 `conda install python-graphviz==0.8.4`
+  - 安装成功后，打开 `environment.yml` 文件，将对应依赖用 # 注释掉，例如 `#- python-graphviz==0.8.4`
+    - 保存后在终端运行下列命令
 
-  ```bash
-  conda env update --name alas --file environment.yml
-  ```
+```bash
+conda env update --name alas --file environment.yml
+```
 
-> 继续完成虚拟环境依赖的安装。如果再次遇到相同错误，重复以上步骤
-> 如遇网络问题，可尝试手动更换镜像源或使用代理
+> [!CAUTION]
+> 更新至 macOS v15.4.1 版本后，虚拟环境出错请尝试在终端运行下列命令
+
+[MacOS Sequoia 15.4.1 更新引发了重复 R 路径的错误](https://stackoverflow.com/a/79592182)
+
+```bash
+conda install "1ibgfortran5>=14"
+```
 
 ---
 
 ## 7. 配置 config/deploy.yaml
 
-1. 输入
+1. 在终端运行下列命令，重命名 `deploy.yaml` 文件
 
-  ```bash
-   cp config/deploy.template-cn.yaml config/deploy.yaml
-  ```
+```bash
+ cp config/deploy.template-cn.yaml config/deploy.yaml
+```
 
-重命名 deploy.yaml 文件。
+2. 在终端逐行运行下列命令，分别查看并记录 `Git`、`Python`、`Adb` 的安装路径
 
-2. 在终端分别运行以下命令，分别查看 git、python、adb 的安装路径:
+```bash
+# 查找 Git
+which git
+# 查找 Python
+which python
+# 查找 Adb
+which adb
+```
 
-  ```bash
-  which git
-  which python
-  which adb
-  ```
+- 若未找到可使用 `source ~/.bash_profile` 激活环境后再试
 
-记录下它们的路径
+3. 打开 ALAS 目录下的 `config/deploy.yaml` 文件，找到并替换路径
 
-- 若未找到可使用`source ~/.bash_profile`激活环境后再试
+```yaml
+Git:
+  # Filepath of git executable
+  GitExecutable: ./toolkit/Git/mingw64/bin/git.exe
+  # 把 which git 得到的地址替换这里，例如/usr/bin/git
 
-3. 打开 alas 目录下的 config/deploy.yaml 文件，找到:
+Python:
+  # Filepath of python executable
+  PythonExecutable: ./toolkit/python.exe
+  # 把 which python 得到的地址替换这里
 
-  ```yaml
-  Git:
-    # Filepath of git executable
-    GitExecutable: ./toolkit/Git/mingw64/bin/git.exe 
-    # 把 which git 得到的地址替换这里，例如/usr/bin/git
-
-  Python:
-    # Filepath of python executable
-    PythonExecutable: ./toolkit/python.exe 
-    # 把 which python 得到的地址替换这里
-
-  Adb:
-    # Filepath of ADB executable
-    AdbExecutable: ./toolkit/Lib/site-packages/adbutils/binaries/adb.exe 
-    # 把 which adb 得到的地址替换这里
-  ```
-
-把得到的地址分别替换进去
+Adb:
+  # Filepath of ADB executable
+  AdbExecutable: ./toolkit/Lib/site-packages/adbutils/binaries/adb.exe
+  # 把 which adb 得到的地址替换这里
+```
 
 ---
 
-## 8. 运行 Alas
+## 8. 运行 ALAS
 
-1. 激活环境  
-   `conda activate alas`
+1. 激活环境
 
-2. 进入脚本目录  
-   `cd AzurLaneAutoScript`
+```bash
+conda activate alas
+```
 
-3. 运行 GUI  
-   `python gui.py`
+2. 进入脚本目录
 
-4. 打开浏览器访问 `127.0.0.1:22267`，即可看到 Alas 的图形界面
+```bash
+cd AzurLaneAutoScript
+```
 
-   - 运行后，如果需要关闭浏览器，可以随时关掉，只要终端没关闭，Alas 就仍然在运行。
+3. 运行 GUI
+
+```bash
+python gui.py
+```
+
+4. 打开浏览器访问 `http://127.0.0.1:22267`，即可看到 ALAS 的图形界面
+
+   - 可随时关闭浏览器，只要终端没关闭，ALAS 就不会终止运行
 
 ---
+
+> [!NOTE]
+> 后续可直接运行 sh 脚本，而不是按照步骤 8.来运行 ALAS
 
 ## 9. 使用脚本运行 ALAS
 
 创建并配置 run_alas.sh 文件
 
-1. 创建脚本文件 run_alas.sh
+1. 在终端执行下列代码，创建脚本文件
 
-  在终端输入`touch run_alas.sh` ，创建脚本文件
+```bash
+touch run_alas.sh
+```
 
 2. 编辑脚本文件
 
-  ```bash
-  #!/bin/bash
+```bash
+#!/bin/bash
 
-  # 初始化 Conda
-  conda init
-  source ~/.bash_profile
+# 初始化 Conda
+conda init
+source ~/.bash_profile
 
-  # 激活 alas 环境
-  conda activate alas
+# 激活 alas 环境
+conda activate alas
 
-  # 切换到 alas 目录
-  cd /Users/<yourname>/AzurLaneAutoScript
+# 切换到 alas 目录
+cd /Users/<yourname>/AzurLaneAutoScript
 
-  # 运行 gui.py
-  python gui.py
-  ```
+# 运行 gui.py
+python gui.py
+```
 
 3. 修改脚本文件权限
 
-  ```bash
-  chmod +x run_alas.sh
-  ```
+```bash
+chmod +x run_alas.sh
+```
 
 4. 运行脚本
 
-  ```bash
-  ./run_alas.sh
-  ```
+```bash
+./run_alas.sh
+```
 
-5. 打开浏览器访问 `127.0.0.1:22267`，即可看到 Alas 的图形界面
+5. 打开浏览器访问 `http://127.0.0.1:22267`，即可看到 ALAS 的图形界面
 
 ## 换行符转换
 
-  若使用远程桌面（WIN 到 MAC）部署脚本，请将脚本文件使用 dos2unix 换行符转换为 UNIX 标准。
+若使用远程桌面（WIN 到 MAC）部署脚本，请将脚本文件使用 `dos2unix 将换行符转换为 UNIX 标准。
 
-  ```bash
-  # 安装 dos2unix
-  brew install dos2unix
-  # 使用 dos2unix 转换换行符
-  dos2unix run_alas.sh
-  ```
+```bash
+# 安装 dos2unix
+brew install dos2unix
+
+# 使用 dos2unix 转换换行符
+dos2unix run_alas.sh
+```
 
 ---
 
 ## 附录 终端单次临时代理设置
 
-  ```bash
-  export http_proxy="http://127.0.0.1:<port>"
-  export socks_proxy="socks://127.0.0.1:<port>"
-  ```
+在终端中运行即可
 
-  其中，<port> 为代理端口，例如 8080。
+```bash
+# <port> 为代理端口
+export http_proxy="http://127.0.0.1:<port>"
+export https_proxy="http://127.0.0.1:<port>"
+export socks_proxy="socks://127.0.0.1:<port>"
+```
