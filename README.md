@@ -4,14 +4,16 @@
 > 本文默认您熟练掌握 CD 命令，并能链接 Github，且熟练掌握国内源设置
 
 > [!TIP]
-> 如果遇到下载困难，请自行设置代理或者使用国内源安装
+> 如果遇到下载问题，请自行设置代理或者使用国内源安装
 
 在 Mac ARM 中使用 Conda 安装与配置 AzurLaneAutoScript 指南
 
-## 1. 安装 HomeBrew
+---
 
 > [!NOTE]
 > HomeBrew 是 macOS 的包管理器
+
+## 1. 安装 HomeBrew
 
 1. 打开**终端（Terminal）**
 
@@ -21,12 +23,10 @@
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-3.配置环境变量
-
 > [!IMPORTANT]
 > macOS 中默认的环境变量是 zshrc，本文使用 bash_profile
 
-在终端中逐行运行下列命令
+3. 配置环境变量，在终端中逐行运行下列命令
 
 ```bash
 # 创建 .bash_profile
@@ -47,10 +47,10 @@ brew --version
 
 ---
 
-## 2. 使用 HomeBrew 安装 git 和 adb
-
 > [!NOTE]
 > git 和 adb 是 Alas 运行所需工具
+
+## 2. 使用 HomeBrew 安装 git 和 adb
 
 在终端中运行下列命令
 
@@ -60,14 +60,14 @@ brew install git android-platform-tools
 
 ---
 
-## 3. 安装 Miniforge
-
 > [!NOTE]
 > Miniforge 是 conda 环境的轻量级发行版
 
+## 3. 安装 Miniforge
+
 1. 点击[Miniforge3](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)，下载安装包
 
-2. 运行安装脚本
+2. 运行安装脚本，根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
 
 ```bash
 # 进入下载目录
@@ -75,8 +75,6 @@ cd downloads
 # 运行安装脚本
 bash Miniforge3-MacOSX-arm64.sh
 ```
-
-根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
 
 3. 验证安装
 
@@ -105,22 +103,22 @@ cd AzurLaneAutoScript
 
 ---
 
-## 5. 创建并配置 environment.yml 文件
-
 > [!NOTE]
 > environment.yml 定义了 Alas 的虚拟环境
 
-1. 在终端中输入下列命令为 Alas 目录下新建名为 `environment.yml` 的文件
+## 5. 创建并配置 environment.yml 文件
 
-- 或从本仓库中下载 [environment.yml](./environment.yml) 文件，后放置到 Alas 目录下
+1. 在终端中输入下列命令为 Alas 目录下新建名为 `environment.yml` 的文件
 
 ```bash
 touch environment.yml
 ```
 
+- 或从本仓库中下载 [environment.yml](./environment.yml) 文件，后放置到 Alas 目录下
+
 <details>
 <summary>
-2. 打开文件 `environment.yml` 填入，折叠内容
+2. 打开文件 `environment.yml` 填入，被折叠的内容
 </summary>
 
 ```yaml
@@ -345,10 +343,10 @@ dependencies:
 
 ---
 
-## 6. 创建并配置虚拟环境
-
 > [!IMPORTANT]
-> 如果部分依赖无法安装，请重复步骤 6-2
+> 如果部分依赖无法安装，请重复执行步骤 6-2
+
+## 6. 创建并配置虚拟环境
 
 1. 在 Alas 目录下运行下列命令：
 
@@ -358,21 +356,18 @@ conda env create -f environment.yml
 
 2. 如果部分依赖无法安装，出现类似 No matching distribution found for XXX 的报错:
 
-   - 在命令行使用 conda install <无法安装的包名> 独立安装，例如`conda install python-graphviz==0.8.4`
-   - 安装成功后，打开 environment.yml 文件，将对应依赖用 # 注释掉，例如 `#- python-graphviz==0.8.4`
-
-保存后在终端运行下列命令
+- 在命令行使用 conda install <无法安装的包名> 独立安装，例如 `conda install python-graphviz==0.8.4`
+  - 安装成功后，打开 environment.yml 文件，将对应依赖用 # 注释掉，例如 `#- python-graphviz==0.8.4`
+    - 保存后在终端运行下列命令
 
 ```bash
 conda env update --name alas --file environment.yml
 ```
 
-附录：更新系统后虚拟环境出错
-
 > [!CAUTION]
-> 更新至 macOS v15.4.X 以上版本后，虚拟环境出错请尝试在终端运行下列命令
+> 更新至 macOS v15.4.1 版本后，虚拟环境出错请尝试在终端运行下列命令
 
-[原问题](https://stackoverflow.com/a/79592182)
+[MacOS Sequoia 15.4.1 更新引发了重复 R 路径的错误](https://stackoverflow.com/a/79592182)
 
 ```bash
 conda install "1ibgfortran5>=14"
@@ -442,11 +437,14 @@ Adb:
 python gui.py
 ```
 
-4. 打开浏览器访问 `127.0.0.1:22267`，即可看到 Alas 的图形界面
+4. 打开浏览器访问 `http://127.0.0.1:22267`，即可看到 ALAS 的图形界面
 
-   - 运行后，如果需要关闭浏览器，可以随时关掉，只要终端没关闭，Alas 就仍然在运行。
+   - 可随时关闭浏览器，只要终端没关闭，ALAS 就不会终止运行
 
 ---
+
+> [!NOTE]
+> 后续可直接运行 sh 脚本，而不是按照步骤 8.来运行 ALAS
 
 ## 9. 使用脚本运行 ALAS
 
@@ -489,15 +487,16 @@ chmod +x run_alas.sh
 ./run_alas.sh
 ```
 
-5. 打开浏览器访问 `http://127.0.0.1:22267`，即可看到 Alas 的图形界面
+5. 打开浏览器访问 `http://127.0.0.1:22267`，即可看到 ALAS 的图形界面
 
 ## 换行符转换
 
-若使用远程桌面（WIN 到 MAC）部署脚本，请将脚本文件使用 dos2unix 换行符转换为 UNIX 标准。
+若使用远程桌面（WIN 到 MAC）部署脚本，请将脚本文件使用 `dos2unix 将换行符转换为 UNIX 标准。
 
 ```bash
 # 安装 dos2unix
 brew install dos2unix
+
 # 使用 dos2unix 转换换行符
 dos2unix run_alas.sh
 ```
@@ -506,10 +505,11 @@ dos2unix run_alas.sh
 
 ## 附录 终端单次临时代理设置
 
-直接在终端中输入
+在终端中运行即可
 
 ```bash
 # <port> 为代理端口
 export http_proxy="http://127.0.0.1:<port>"
+export https_proxy="http://127.0.0.1:<port>"
 export socks_proxy="socks://127.0.0.1:<port>"
 ```
