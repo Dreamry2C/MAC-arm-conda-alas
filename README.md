@@ -26,7 +26,7 @@
 > [!IMPORTANT]
 > macOS 中默认的环境变量是 .zshrc，本文使用 .bash_profile
 
-1. 配置环境变量，在终端中逐行运行下列命令
+3. 配置环境变量，在终端中逐行运行下列命令
 
 ```bash
 # 创建 .bash_profile
@@ -410,6 +410,9 @@ Adb:
 1. 激活环境
 
 ```bash
+# 激活环境变量
+source ~/.bash_profile
+# 激活 ALAS 虚拟环境
 conda activate alas
 ```
 
@@ -500,6 +503,8 @@ dos2unix run_alas.sh
 ```bash
 # 进入下载目录
 cd downloads
+# 激活环境变量
+source ~/.bash_profile
 # 运行安装脚本
 bash Miniforge3-MacOSX-arm64.sh
 ```
@@ -509,9 +514,6 @@ bash Miniforge3-MacOSX-arm64.sh
 ```bash
 conda --version
 ```
-
-> [!TIP]
-> 在步骤 1.中已执行过 source ~/.bash_profile，一般无需再次配置环境变量
 
 ---
 
