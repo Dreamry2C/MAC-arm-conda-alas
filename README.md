@@ -1,7 +1,7 @@
 # MAC ARM Conda ALAS
 
 > [!NOTE]
-> 本文默认您熟练掌握 CD 命令，并能链接 Github，且熟练掌握国内源设置，本文不涉及 Vim/Nano 编辑器
+> 本文默认您熟练使用 macOS，并能链接 Github，且熟练掌握国内源设置
 
 > [!TIP]
 > 如果遇到下载问题，请自行设置代理或使用国内源
@@ -48,46 +48,28 @@ brew --version
 ---
 
 > [!NOTE]
-> Git 和 Adb 是 ALAS 运行所需工具
+> Git 和 Adb 是 ALAS 运行所需工具  
+> Miniforge 是 Conda 环境的轻量级、跨平台的发行版
 
-## 2. 使用 HomeBrew 安装 Git 和 Adb
+## 2. 使用 HomeBrew 安装 Miniforge 与 Git 及 Adb
 
-在终端中运行下列命令
+1. 在终端中运行下列命令
 
 ```bash
-brew install git android-platform-tools
+brew install miniforge git android-platform-tools
 ```
 
----
-
-> [!NOTE]
-> Miniforge 是 conda 环境的轻量级发行版
-
-## 3. 安装 Miniforge
-
-1. 点击[Miniforge3](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)，下载安装包
-
-2. 在终端中运行安装脚本，根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
+2. 验证安装
 
 ```bash
-# 进入下载目录
-cd downloads
-# 运行安装脚本
-bash Miniforge3-MacOSX-arm64.sh
-```
-
-3. 验证安装
-
-```bash
+adb --version
+git --version
 conda --version
 ```
 
-> [!TIP]
-> 在步骤 1.中已执行过 source ~/.bash_profile，一般无需再次配置环境变量
-
 ---
 
-## 4. 下载 AzurLaneAutoScript
+## 3. 下载 AzurLaneAutoScript
 
 1. 使用 Git 拉取 ALAS
 
@@ -106,7 +88,7 @@ cd AzurLaneAutoScript
 > [!NOTE]
 > environment.yml 定义了 ALAS 的虚拟环境
 
-## 5. 创建并配置 environment.yml 文件
+## 4. 创建并配置 environment.yml 文件
 
 1. 在终端中输入下列命令为 ALAS 目录下新建名为 `environment.yml` 的文件
 
@@ -344,9 +326,9 @@ dependencies:
 ---
 
 > [!IMPORTANT]
-> 如果部分依赖无法安装，请重复执行步骤 6-2
+> 如果部分依赖无法安装，请重复执行步骤 5-2
 
-## 6. 创建并配置虚拟环境
+## 5. 创建并配置虚拟环境
 
 1. 在 ALAS 目录下运行下列命令：
 
@@ -377,7 +359,7 @@ conda install "1ibgfortran5>=14"
 
 ---
 
-## 7. 配置 config/deploy.yaml
+## 6. 配置 config/deploy.yaml
 
 1. 在终端运行下列命令，重命名 `deploy.yaml` 文件
 
@@ -421,7 +403,7 @@ Adb:
 
 ---
 
-## 8. 运行 ALAS
+## 7. 运行 ALAS
 
 1. 激活环境
 
@@ -448,9 +430,9 @@ python gui.py
 ---
 
 > [!NOTE]
-> 后续可直接运行 sh 脚本，而不是按照步骤 8. 来运行 ALAS
+> 后续可直接运行 sh 脚本，而不是按照步骤 7. 来运行 ALAS
 
-## 9. 使用脚本运行 ALAS
+## 8. 使用脚本运行 ALAS
 
 创建并配置 run_alas.sh 文件
 
@@ -491,7 +473,7 @@ chmod +x run_alas.sh
 ./run_alas.sh
 ```
 
-5. 打开浏览器访问 `http://127.0.0.1:22267`，即可看到 ALAS 的图形界面
+5. 打开浏览器访问 `http://127.0.0.1:22267`
 
 ## 换行符转换
 
