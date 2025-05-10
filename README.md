@@ -67,6 +67,8 @@ git --version
 conda --version
 ```
 
+- 若 Miniforge 安装失败请阅读 [附录 手动安装 Miniforge](#附录-手动安装-Miniforge)
+
 ---
 
 ## 3. 下载 AzurLaneAutoScript
@@ -486,6 +488,30 @@ brew install dos2unix
 # 使用 dos2unix 转换换行符
 dos2unix run_alas.sh
 ```
+
+---
+
+## 附录 手动安装 Miniforge
+
+1. 点击[Miniforge3](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)，下载安装包
+
+2. 运行安装脚本，根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
+
+```bash
+# 进入下载目录
+cd downloads
+# 运行安装脚本
+bash Miniforge3-MacOSX-arm64.sh
+```
+
+3. 验证安装
+
+```bash
+conda --version
+```
+
+> [!TIP]
+> 在步骤 1.中已执行过 source ~/.bash_profile，一般无需再次配置环境变量
 
 ---
 
