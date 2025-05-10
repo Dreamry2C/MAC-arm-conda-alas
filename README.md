@@ -1,10 +1,10 @@
 # MAC ARM Conda ALAS
 
 > [!NOTE]
-> 本文默认您熟练掌握 CD 命令，并能链接 Github，且熟练掌握国内源设置
+> 本文默认您熟练掌握 CD 命令，并能链接 Github，且熟练掌握国内源设置，本文不涉及 Vim/Nano 编辑器
 
 > [!TIP]
-> 如果遇到下载问题，请自行设置代理或者使用国内源安装
+> 如果遇到下载问题，请自行设置代理或使用国内源
 
 在 Mac ARM 中使用 Conda 安装与配置 AzurLaneAutoScript 的指南
 
@@ -26,7 +26,7 @@
 > [!IMPORTANT]
 > macOS 中默认的环境变量是 .zshrc，本文使用 .bash_profile
 
-3. 配置环境变量，在终端中逐行运行下列命令
+1. 配置环境变量，在终端中逐行运行下列命令
 
 ```bash
 # 创建 .bash_profile
@@ -67,7 +67,7 @@ brew install git android-platform-tools
 
 1. 点击[Miniforge3](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)，下载安装包
 
-2. 运行安装脚本，根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
+2. 在终端中运行安装脚本，根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
 
 ```bash
 # 进入下载目录
@@ -357,12 +357,14 @@ conda env create -f environment.yml
 2. 如果部分依赖无法安装，出现类似 `No matching distribution found for XXX` 的报错:
 
 - 在命令行使用 `conda install <无法安装的包名>` 独立安装，例如 `conda install python-graphviz==0.8.4`
-  - 安装成功后，打开 `environment.yml` 文件，将对应依赖用 # 注释掉，例如 `#- python-graphviz==0.8.4`
+
+  - 安装成功后，打开 `environment.yml` 文件，将对应依赖用 `#` 注释掉，例如 `#- python-graphviz==0.8.4`
+
     - 保存后在终端运行下列命令
 
-```bash
-conda env update --name alas --file environment.yml
-```
+    ```bash
+    conda env update --name alas --file environment.yml
+    ```
 
 > [!CAUTION]
 > 更新至 macOS v15.4.1 版本后，虚拟环境出错请尝试在终端运行下列命令
@@ -415,6 +417,8 @@ Adb:
   # 把 which adb 得到的地址替换这里
 ```
 
+4. 阅读 [ALAS 安装 WIKI](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn) ，根据 [WIKI - 编辑安装设置一节](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn#%E7%BC%96%E8%BE%91%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE)修改 `config/deploy.yaml` 文件
+
 ---
 
 ## 8. 运行 ALAS
@@ -444,7 +448,7 @@ python gui.py
 ---
 
 > [!NOTE]
-> 后续可直接运行 sh 脚本，而不是按照步骤 8.来运行 ALAS
+> 后续可直接运行 sh 脚本，而不是按照步骤 8. 来运行 ALAS
 
 ## 9. 使用脚本运行 ALAS
 
@@ -491,7 +495,7 @@ chmod +x run_alas.sh
 
 ## 换行符转换
 
-若使用远程桌面（WIN 到 MAC）部署脚本，请将脚本文件使用 `dos2unix 将换行符转换为 UNIX 标准。
+若使用远程桌面（WIN 到 MAC）部署脚本，请使用 `dos2unix` 将脚本文件换行符转换为 UNIX 标准。
 
 ```bash
 # 安装 dos2unix
