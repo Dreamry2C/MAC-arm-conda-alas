@@ -1,6 +1,6 @@
 # MAC ARM Conda ALAS
 
-> [!Warning]
+> [!Tip]
 > 本文默认读者对能使用 macOS 下的命令行操作有基本了解；  
 > 本文默认读者能链接 Github，且熟练掌握国内源设置；  
 > 如果遇到下载问题，请自行设置终端代理或设置国内源后再试。
@@ -402,7 +402,7 @@ Adb:
   # 把 which adb 得到的地址替换这里
 ```
 
-4. 阅读 [ALAS 安装 WIKI](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn) ，根据 [WIKI - 编辑安装设置一节](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn#%E7%BC%96%E8%BE%91%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE)修改 `config/deploy.yaml` 文件
+4. 阅读 [ALAS 安装 WIKI](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn) ，根据[编辑安装设置](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn#%E7%BC%96%E8%BE%91%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE)一节修改 `config/deploy.yaml` 文件
 
 ---
 
