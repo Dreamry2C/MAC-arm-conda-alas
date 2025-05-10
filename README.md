@@ -1,10 +1,9 @@
 # MAC ARM Conda ALAS
 
-> [!NOTE]
-> 本文默认您熟练使用 macOS，并能链接 Github，且熟练掌握国内源设置
-
-> [!TIP]
-> 如果遇到下载问题，请自行设置代理或使用国内源
+> [!Warning]
+> 本文默认读者对能使用 macOS 下的命令行操作有基本了解；  
+> 本文默认读者能链接 Github，且熟练掌握国内源设置；  
+> 如果遇到下载问题，请自行设置终端代理或设置国内源后再试。
 
 在 Mac ARM 中使用 Conda 安装与配置 AzurLaneAutoScript 的指南
 
@@ -24,7 +23,8 @@
 ```
 
 > [!IMPORTANT]
-> macOS 中默认的环境变量是 .zshrc，本文使用 .bash_profile
+> macOS 中默认的环境变量是 .zshrc，本文使用 .bash_profile 进行配置  
+> 可以使用任意变量名，只需要后续都修改 .bash_profile 为自定义变量名即可
 
 3. 配置环境变量，在终端中逐行运行下列命令
 
@@ -67,7 +67,8 @@ git --version
 conda --version
 ```
 
-- 若 Miniforge 安装失败请阅读 [附录 手动安装 Miniforge](#附录-手动安装-Miniforge)
+> [!IMPORTANT]
+> 若 Miniforge 安装失败请阅读 [附录 手动安装 Miniforge](#附录-手动安装-Miniforge)
 
 ---
 
