@@ -49,7 +49,7 @@ brew --version
 
 > [!NOTE]
 > Git 和 Adb 是 ALAS 运行所需工具  
-> Miniforge 是 Conda 环境的轻量级、跨平台的发行版
+> Miniforge 是 Conda 环境的轻量级、跨平台发行版
 
 ## 2. 使用 HomeBrew 安装 Miniforge 与 Git 及 Adb
 
@@ -354,7 +354,7 @@ conda env create -f environment.yml
 [MacOS Sequoia 15.4.1 更新引发了重复 R 路径的错误](https://stackoverflow.com/a/79592182)
 
 ```bash
-conda install "1ibgfortran5>=14"
+conda install "libgfortran5>=14"
 ```
 
 ---
