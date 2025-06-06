@@ -22,21 +22,24 @@
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-> [!IMPORTANT]
-> macOS 中默认的环境变量是 .zshrc，本文使用 .bash_profile 进行配置  
-> 可以使用任意变量名，只需要后续都修改 .bash_profile 为自定义变量名即可
+> [!NOTE]
+> 本文使用 macOS 中默认的环境变量 .zshrc 进行配置
 
-3. 配置环境变量，在终端中逐行运行下列命令
+> [!IMPORTANT]
+> .zshrc 环境变量会在每次启动终端时自动生效，因此后续无需再手动激活环境变量  
+> 可以使用任意变量名，只需要后续都修改 .zshrc 为自定义变量名即可
+
+1. 配置环境变量，在终端中逐行运行下列命令
 
 ```bash
-# 创建 .bash_profile
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
+# 创建 .zshrc
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc
 
 # 添加环境变量
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # 激活环境变量
-source ~/.bash_profile
+source ~/.zshrc
 ```
 
 4. 验证安装
@@ -381,7 +384,7 @@ which python
 which adb
 ```
 
-- 若未找到可使用 `source ~/.bash_profile` 激活环境后再试
+- 若未找到可重启终端后再试
 
 3. 打开 ALAS 目录下的 `config/deploy.yaml` 文件，找到并替换路径
 
@@ -411,8 +414,6 @@ Adb:
 1. 激活环境
 
 ```bash
-# 激活环境变量
-source ~/.bash_profile
 # 激活 ALAS 虚拟环境
 conda activate alas
 ```
@@ -455,7 +456,8 @@ touch run_alas.sh
 
 # 初始化 Conda
 conda init
-source ~/.bash_profile
+# 激活 .zshrc 环境
+source ~/.zshrc
 
 # 激活 alas 环境
 conda activate alas
@@ -481,7 +483,7 @@ chmod +x run_alas.sh
 
 5. 打开浏览器访问 `http://127.0.0.1:22267`
 
-## 换行符转换
+## 附录 换行符转换
 
 若使用远程桌面（WIN 到 MAC）部署脚本，请使用 `dos2unix` 将脚本文件换行符转换为 UNIX 标准。
 
@@ -505,7 +507,7 @@ dos2unix run_alas.sh
 # 进入下载目录
 cd downloads
 # 激活环境变量
-source ~/.bash_profile
+source ~/.zshrc
 # 运行安装脚本
 bash Miniforge3-MacOSX-arm64.sh
 ```
