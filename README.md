@@ -5,12 +5,12 @@
 > 本文默认读者能链接 Github，且熟练掌握国内源设置；  
 > 如果遇到下载问题，请自行设置终端代理或设置国内源后再试。
 
-在 Mac ARM 中使用 Conda 安装与配置 AzurLaneAutoScript 的指南
+在 Mac ARM 中使用 Conda 安装与配置 [AzurLaneAutoScript](https://github.com/LmeSzinc/AzurLaneAutoScript) 的指南
 
 ---
 
 > [!NOTE]
-> HomeBrew 是 macOS 的包管理器
+> [HomeBrew](https://brew.sh/zh-cn/) 是 macOS 的包管理器
 
 ## 1. 安装 HomeBrew
 
@@ -26,10 +26,14 @@
 > 本文使用 macOS 中默认的环境变量 .zshrc 进行配置
 
 > [!IMPORTANT]
-> .zshrc 环境变量会在每次启动终端时自动生效，因此后续无需再手动激活环境变量  
-> 可以使用任意变量名，只需要后续都修改 .zshrc 为自定义变量名即可
+> .zshrc 环境变量会在每次启动终端时自动生效，因此后续无需再手动激活环境变量
 
-1. 配置环境变量，在终端中逐行运行下列命令
+> [!Tip]
+> 可以使用任意变量名，只需要后续都修改 .zshrc 为自定义变量名即可  
+> 若使用任意变量名，每次启动终端都需要手动激活环境变量  
+> 请注意，必须激活环境变量的项目会以 ~/.bash_profile 环境为例标注
+
+3. 配置环境变量，在终端中逐行运行下列命令
 
 ```bash
 # 创建 .zshrc
@@ -357,11 +361,12 @@ conda env create -f environment.yml
 > [!CAUTION]
 > 更新至 macOS v15.4.1 版本后，虚拟环境出错请尝试在终端运行下列命令
 
-[MacOS Sequoia 15.4.1 更新引发了重复 R 路径的错误](https://stackoverflow.com/a/79592182)
-
 ```bash
 conda install "libgfortran5>=14"
 ```
+
+文献来源：
+[MacOS Sequoia 15.4.1 更新引发了重复 R 路径的错误](https://stackoverflow.com/a/79592182)
 
 ---
 
@@ -456,8 +461,9 @@ touch run_alas.sh
 
 # 初始化 Conda
 conda init
-# 激活 .zshrc 环境
-source ~/.zshrc
+
+# 激活环境变量，以 ~/.bash_profile 环境为例，若使用 .zshrc 环境则无需手动激活
+# source ~/.bash_profile
 
 # 激活 alas 环境
 conda activate alas
@@ -499,15 +505,17 @@ dos2unix run_alas.sh
 
 ## 附录 手动安装 Miniforge
 
-1. 点击[Miniforge3](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)，下载安装包
+1. 点击 [Miniforge3](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)，直接下载安装包
 
 2. 运行安装脚本，根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
 
 ```bash
 # 进入下载目录
 cd downloads
-# 激活环境变量
-source ~/.zshrc
+
+# 激活环境变量，以 ~/.bash_profile 环境为例，若使用 .zshrc 环境则无需手动激活
+# source ~/.bash_profile
+
 # 运行安装脚本
 bash Miniforge3-MacOSX-arm64.sh
 ```
