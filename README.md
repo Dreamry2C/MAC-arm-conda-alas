@@ -22,15 +22,15 @@
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-> [!NOTE]
+> [!Tip]
 > 本文使用 macOS 中默认的环境变量 .zshrc 进行配置
 
 > [!IMPORTANT]
 > .zshrc 环境变量会在每次启动终端时自动生效，因此后续无需再手动激活环境变量
 
-> [!Tip]
-> 可以使用任意变量名，只需要后续都修改 .zshrc 为自定义变量名即可  
-> 若使用任意变量名，每次启动终端都需要手动激活环境变量  
+> [!NOTE]
+> 可以使用自定义环境变量名，只需要后续都修改 .zshrc 为自定义环境变量名即可  
+> 请注意，若使用自定义环境变量名，每次启动终端都需要手动激活环境变量  
 > 请注意，必须激活环境变量的项目会以 ~/.bash_profile 环境为例标注
 
 3. 配置环境变量，在终端中逐行运行下列命令
@@ -359,7 +359,8 @@ conda env create -f environment.yml
     ```
 
 > [!CAUTION]
-> 更新至 macOS v15.4.1 版本后，虚拟环境出错请尝试在终端运行下列命令
+> 更新至 macOS v15.4.1 版本后，虚拟环境出错请尝试在终端运行下列命令  
+> 若然还是出错，请尝试删除 [ALAS 虚拟环境](#附录-删除虚拟环境)后重新执行[步骤 5](#5-创建并配置虚拟环境)
 
 ```bash
 conda install "libgfortran5>=14"
@@ -383,8 +384,10 @@ conda install "libgfortran5>=14"
 ```bash
 # 查找 Git
 which git
+
 # 查找 Python
 which python
+
 # 查找 Adb
 which adb
 ```
@@ -524,6 +527,24 @@ bash Miniforge3-MacOSX-arm64.sh
 
 ```bash
 conda --version
+```
+
+---
+
+## 附录 删除虚拟环境
+
+```bash
+# 退出虚拟环境
+conda deactivate
+ 
+# 查看虚拟环境列表
+conda env list
+
+# 删除 ALAS 虚拟环境
+conda remove -n  alas --all
+
+# 若重命名过 ALAS 虚拟环境，请自行参照下列命令自行删除虚拟环境
+conda remove -n 需要删除的环境名 --all
 ```
 
 ---
