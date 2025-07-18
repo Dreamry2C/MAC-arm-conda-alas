@@ -26,12 +26,7 @@
 > 本文使用 macOS 中默认的环境变量 .zshrc 进行配置
 
 > [!IMPORTANT]
-> .zshrc 环境变量会在每次启动终端时自动生效，因此后续无需再手动激活环境变量
-
-> [!NOTE]
-> 可以使用自定义环境变量名，只需要后续都修改 .zshrc 为自定义环境变量名即可  
-> 请注意，若使用自定义环境变量名，每次启动终端都需要手动激活环境变量  
-> 请注意，必须激活环境变量的项目会以 ~/.bash_profile 环境为例标注
+> .zshrc 环境变量会在每次启动终端时自动生效，因此后续无需手动激活环境变量
 
 3. 配置环境变量，在终端中逐行运行下列命令
 
@@ -96,7 +91,7 @@ cd AzurLaneAutoScript
 ---
 
 > [!NOTE]
-> environment.yml 定义了 ALAS 的虚拟环境
+> environment.yml 定义了 ALAS 虚拟环境配置
 
 ## 4. 创建并配置 environment.yml 文件
 
@@ -360,7 +355,7 @@ conda env create -f environment.yml
 
 > [!CAUTION]
 > 更新至 macOS v15.4.1 版本后，虚拟环境出错请尝试在终端运行下列命令  
-> 若然还是出错，请尝试删除 [ALAS 虚拟环境](#附录-删除虚拟环境)后重新执行[步骤 5](#5-创建并配置虚拟环境)
+> 若还是出错，请尝试删除 [ALAS 虚拟环境](#附录-删除虚拟环境) 后重新执行步骤 5
 
 ```bash
 conda install "libgfortran5>=14"
@@ -465,9 +460,6 @@ touch run_alas.sh
 # 初始化 Conda
 conda init
 
-# 激活环境变量，以 ~/.bash_profile 环境为例，若使用 .zshrc 环境则无需手动激活
-# source ~/.bash_profile
-
 # 激活 alas 环境
 conda activate alas
 
@@ -494,7 +486,8 @@ chmod +x run_alas.sh
 
 ## 附录 换行符转换
 
-若使用远程桌面（WIN 到 MAC）部署脚本，请使用 `dos2unix` 将脚本文件换行符转换为 UNIX 标准。
+若使用远程桌面（WIN 到 MAC）部署脚本或在 WIN 中编写后传输到 MAC中；
+请使用 `dos2unix` 将脚本文件换行符转换为 UNIX 标准。
 
 ```bash
 # 安装 dos2unix
@@ -515,9 +508,6 @@ dos2unix run_alas.sh
 ```bash
 # 进入下载目录
 cd downloads
-
-# 激活环境变量，以 ~/.bash_profile 环境为例，若使用 .zshrc 环境则无需手动激活
-# source ~/.bash_profile
 
 # 运行安装脚本
 bash Miniforge3-MacOSX-arm64.sh
