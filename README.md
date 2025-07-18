@@ -105,7 +105,7 @@ touch environment.yml
 
 <details>
 <summary>
-2. 打开文件 `environment.yml` 填入，被折叠的内容
+2. 打开文件 environment.yml 并填入被折叠的内容
 </summary>
 
 ```yaml
