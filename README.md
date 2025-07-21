@@ -1,9 +1,9 @@
 # MAC ARM Conda ALAS
 
 > [!Tip]
-> 本文默认读者对能使用 macOS 下的命令行操作有基本了解；  
-> 本文默认读者能链接 Github，且熟练掌握国内源设置；  
-> 如果遇到下载问题，请自行设置终端代理或设置国内源后再试。
+> 本文默认读者对 macOS 下的命令行操作有基本了解；  
+> 本文默认读者能正常访问 Github 与各库官方源，且熟练掌握国内源设置；  
+> 如遇下载问题，请自行设置终端代理或国内源后再试。
 
 在 Mac ARM 中使用 Conda 安装与配置 [AzurLaneAutoScript](https://github.com/LmeSzinc/AzurLaneAutoScript) 的指南
 
@@ -61,7 +61,7 @@ brew --version
 brew install miniforge git android-platform-tools
 ```
 
-2. 验证安装
+2. 在终端逐行运行下列命令，验证是否安装成功
 
 ```bash
 adb --version
