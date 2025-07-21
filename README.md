@@ -65,11 +65,13 @@ brew install miniforge git android-platform-tools
 
 ```bash
 adb --version
+
 git --version
+
 conda --version
 ```
 
-> [!IMPORTANT]
+> [!CAUTION]
 > 若 Miniforge 安装失败请阅读 [附录 手动安装 Miniforge](#附录-手动安装-Miniforge)
 
 ---
@@ -408,7 +410,7 @@ Adb:
   # 把 which adb 得到的地址替换这里
 ```
 
-4. 阅读 [ALAS 安装 WIKI](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn) ，根据[编辑安装设置](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn#%E7%BC%96%E8%BE%91%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE)一节修改 `config/deploy.yaml` 文件
+4. 阅读 [ALAS 安装 WIKI](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn) ，根据 [编辑安装设置](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn#%E7%BC%96%E8%BE%91%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE) 一节修改 `config/deploy.yaml` 文件
 
 ---
 
@@ -547,5 +549,4 @@ conda remove -n 需要删除的环境名 --all
 # <port> 为代理端口
 export http_proxy="http://127.0.0.1:<port>"
 export https_proxy="http://127.0.0.1:<port>"
-export socks_proxy="socks://127.0.0.1:<port>"
 ```
