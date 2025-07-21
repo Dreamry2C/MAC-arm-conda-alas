@@ -2,13 +2,13 @@
 
 > [!Tip]
 > 本文默认读者对 macOS 下的命令行操作有基本了解；  
-> 本文默认读者能正常访问 Github 与各库官方源，且熟练掌握国内源设置；  
+> 本文默认读者能正常访问 Github 与各官方库；  
 > 如遇下载问题，请自行设置终端代理或国内源后再试。
 
 在 Mac ARM 中使用 Conda 安装与配置 [AzurLaneAutoScript](https://github.com/LmeSzinc/AzurLaneAutoScript) 的指南
 
 > [!IMPORTANT]
-> 如遇不会的情况，请结合 [配套视频教程](https://www.bilibili.com/video/BV1JQG2z7EUt "碧蓝航线挂机功耗个位数，真正低耗的神！Mac版本alas安装教程") 操作。
+> 如遇不会的情况，请结合 [配套视频教程](https://www.bilibili.com/video/BV1JQG2z7EUt "碧蓝航线挂机功耗个位数，真正低耗的神！Mac版本alas安装教程") 操作
 
 ---
 
@@ -28,9 +28,6 @@
 > [!Tip]
 > 本文使用 macOS 中默认的环境变量 .zshrc 进行配置
 
-> [!IMPORTANT]
-> .zshrc 环境变量会在每次启动终端时自动生效，因此后续无需手动激活环境变量
-
 3. 配置环境变量，在终端中逐行运行下列命令
 
 ```bash
@@ -44,6 +41,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 source ~/.zshrc
 ```
 
+> [!IMPORTANT]
+> .zshrc 环境变量会在每次启动终端时自动生效，因此后续无需手动激活环境变量
+
 4. 验证安装
 
 ```bash
@@ -53,8 +53,8 @@ brew --version
 ---
 
 > [!NOTE]
-> Git 和 Adb 是 ALAS 运行所需工具  
-> Miniforge 是 Conda 环境的轻量级、跨平台发行版
+> [Git](https://git-scm.com/) 和 [Adb](https://developer.android.google.cn/tools/adb) 是 ALAS 运行所需工具  
+> [Miniforge](https://conda-forge.org/) 是 Conda 环境的轻量级、跨平台发行版
 
 ## 2. 使用 HomeBrew 安装 Miniforge 与 Git 及 Adb
 
