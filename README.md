@@ -7,6 +7,9 @@
 
 在 Mac ARM 中使用 Conda 安装与配置 [AzurLaneAutoScript](https://github.com/LmeSzinc/AzurLaneAutoScript) 的指南
 
+> [!IMPORTANT]
+> 如遇不会的情况，请结合 [配套视频教程](https://www.bilibili.com/video/BV1JQG2z7EUt "碧蓝航线挂机功耗个位数，真正低耗的神！Mac版本alas安装教程") 操作。
+
 ---
 
 > [!NOTE]
