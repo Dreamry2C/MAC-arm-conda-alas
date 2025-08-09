@@ -359,7 +359,7 @@ conda env create -f environment.yml
     ```
 
 > [!CAUTION]
-> 更新至 macOS v15.4.1 版本后，虚拟环境出错(错误信息参照 [issues#4](https://github.com/Dreamry2C/MAC-arm-conda-alas/issues/4))，请尝试在终端激活虚拟环境后运行下列命令  
+> 更新至 macOS v15.4.1 版本后，虚拟环境出错(错误信息参照 [#4](https://github.com/Dreamry2C/MAC-arm-conda-alas/issues/4))，在终端激活虚拟环境后请尝试运行下列命令  
 > 若还是出错，请尝试删除 [ALAS 虚拟环境](#附录-删除虚拟环境) 后重新执行 [步骤 5](#5-创建并配置虚拟环境)
 
 ```bash
@@ -496,7 +496,7 @@ chmod +x run_alas.sh
 
 ## 附录 换行符转换
 
-若使用远程桌面（WIN 到 MAC）部署脚本或在 WIN 中编写后传输到 MAC中；
+若使用远程桌面（WIN 到 MAC）部署脚本或在 WIN 中编写后传输到 MAC 中；
 请使用 `dos2unix` 将脚本文件换行符转换为 UNIX 标准。
 
 ```bash
