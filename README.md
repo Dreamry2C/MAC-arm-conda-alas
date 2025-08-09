@@ -5,9 +5,6 @@
 > 本文默认读者能正常访问 Github 与各官方库；  
 > 如遇下载问题，请自行设置终端代理或国内源后再试。
 
-> [!IMPORTANT]
-> 如遇不会的情况，请结合 [配套视频教程](https://www.bilibili.com/video/BV1JQG2z7EUt "碧蓝航线挂机功耗个位数，真正低耗的神！Mac版本alas安装教程") 进行操作
-
 在 Mac ARM 中使用 Conda 安装与配置 [AzurLaneAutoScript](https://github.com/LmeSzinc/AzurLaneAutoScript) 的指南
 
 ---
@@ -74,7 +71,7 @@ git --version
 conda --version
 ```
 
-> [!CAUTION]
+> [!TIP]
 > 若 Miniforge 安装失败请阅读 [附录 手动安装 Miniforge](#附录-手动安装-Miniforge)
 
 ---
@@ -338,6 +335,9 @@ dependencies:
 > [!IMPORTANT]
 > 如果部分依赖无法安装，请重复执行步骤 5-2
 
+> [!WARNING]
+> 步骤 5-2 必须要在虚拟环境内执行
+
 ## 5. 创建并配置虚拟环境
 
 1. 在 ALAS 目录下运行下列命令：
@@ -359,10 +359,14 @@ conda env create -f environment.yml
     ```
 
 > [!CAUTION]
-> 更新至 macOS v15.4.1 版本后，虚拟环境出错请尝试在终端运行下列命令  
-> 若还是出错，请尝试删除 [ALAS 虚拟环境](#附录-删除虚拟环境) 后重新执行步骤 5
+> 更新至 macOS v15.4.1 版本后，虚拟环境出错(错误信息参照 [issues#4](https://github.com/Dreamry2C/MAC-arm-conda-alas/issues/4))，请尝试在终端激活虚拟环境后运行下列命令  
+> 若还是出错，请尝试删除 [ALAS 虚拟环境](#附录-删除虚拟环境) 后重新执行 [步骤 5](#5-创建并配置虚拟环境)
 
 ```bash
+# 需要激活虚拟环境，才能进行下一步
+conda activate alas
+
+# 安装 libgfortran5
 conda install "libgfortran5>=14"
 ```
 
@@ -379,6 +383,9 @@ conda install "libgfortran5>=14"
  cp config/deploy.template-cn.yaml config/deploy.yaml
 ```
 
+> [!TIP]
+> 若未找到对应路径，请重启终端后再试
+
 2. 在终端逐行运行下列命令，分别查看并记录 `Git`、`Python`、`Adb` 的安装路径
 
 ```bash
@@ -392,8 +399,6 @@ which python
 which adb
 ```
 
-- 若未找到可重启终端后再试
-
 3. 打开 ALAS 目录下的 `config/deploy.yaml` 文件，找到并替换路径
 
 ```yaml
@@ -405,7 +410,7 @@ Git:
 Python:
   # Filepath of python executable
   PythonExecutable: ./toolkit/python.exe
-  # 把 which python 得到的地址替换这里
+  # 把 which python 得到的地址替换这里，例如/opt/homebrew/Caskroom/miniforge/base/envs/alas/bin/python3
 
 Adb:
   # Filepath of ADB executable
