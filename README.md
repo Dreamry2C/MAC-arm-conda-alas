@@ -3,7 +3,7 @@
 > [!Tip]
 > 本文默认读者对 macOS 下的命令行操作有基本了解；  
 > 本文默认读者能正常访问 Github 与各官方库；  
-> 如遇下载问题，请自行设置终端代理或国内源后再试。
+> 如遇下载问题，请自行设置国内源或终端代理后再试。
 
 在 Mac ARM 中使用 Conda 安装与配置 [AzurLaneAutoScript](https://github.com/LmeSzinc/AzurLaneAutoScript) 的指南
 
@@ -14,7 +14,7 @@
 
 ## 1. 安装 HomeBrew
 
-1. 打开**终端（Terminal）**
+1. 打开终端（Terminal）
 
 2. 在终端中运行下列命令安装 HomeBrew
 
@@ -88,7 +88,7 @@ conda --version
 git clone https://github.com/LmeSzinc/AzurLaneAutoScript/
 ```
 
-2. **切换到 ALAS 目录**
+2. 切换到 ALAS 目录
 
 ```bash
 cd AzurLaneAutoScript
@@ -341,7 +341,7 @@ dependencies:
 > 如果部分依赖无法安装，请重复执行步骤 5-2
 
 > [!WARNING]
-> 步骤 5-2 必须要在虚拟环境内执行
+> 步骤 5-2 以及 CAUTION 部分必须要在虚拟环境内执行
 
 ## 5. 创建并配置虚拟环境
 
@@ -368,9 +368,6 @@ conda env create -f environment.yml
 > 若还是出错，请尝试删除 [ALAS 虚拟环境](#附录-删除虚拟环境) 后重新执行 [步骤 5](#5-创建并配置虚拟环境)
 
 ```bash
-# 需要激活虚拟环境，才能进行下一步
-conda activate alas
-
 # 安装指定版本的 libgfortran5
 conda install "libgfortran5>=14"
 ```
@@ -427,8 +424,8 @@ Adb:
 
 ---
 
-> [TIP]
-> 当见到 ALAS 的图形界面后，可随时关闭浏览器，只要这个终端没关闭，ALAS 就不会终止运行
+> [!TIP]
+> 当 ALAS WEB GUI 正确运行后，只要这个终端没关闭，ALAS 就不会终止运行
 
 ## 7. 运行 ALAS
 
@@ -451,7 +448,7 @@ cd AzurLaneAutoScript
 python gui.py
 ```
 
-4. 打开浏览器访问 `http://127.0.0.1:22267`，即可看到 ALAS 的图形界面
+4. 打开浏览器访问 `http://127.0.0.1:22267`，即可看到 ALAS WEB GUI
 
 ---
 
@@ -499,7 +496,7 @@ conda activate alas
 
 # 切换到 alas 目录
 cd /Users/<yourname>/AzurLaneAutoScript
-# 手动修改该行中的路径为你的 alas 目录，例：/Users/Dreamry2C/AzurLaneAutoScript 或者 /Users/NEANC/Downloads/AzurLaneAutoScript
+# 手动修改该行中的路径为你的 alas 目录，例：/Users/Dreamry2C/AzurLaneAutoScript 或 /Users/NEANC/Downloads/AzurLaneAutoScript
 
 # 运行 gui.py
 python gui.py
