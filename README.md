@@ -107,6 +107,9 @@ cd AzurLaneAutoScript
 touch environment.yml
 ```
 
+> [!TIP]
+> 或从本仓库中下载 [environment.yml](./environment.yml) 文件，放置到 ALAS 目录下
+
 <details>
 <summary>
 2. 打开文件 environment.yml 并填入被折叠的内容
@@ -332,9 +335,6 @@ dependencies:
 
 </details>
 
-> [!TIP]
-> 或从本仓库中下载 [environment.yml](./environment.yml) 文件，后放置到 ALAS 目录下
-
 ---
 
 > [!IMPORTANT]
@@ -457,13 +457,13 @@ python gui.py
 
 > [!IMPORTANT]
 > 后续可直接运行 sh 脚本，而不是按照步骤 7. 来运行 ALAS  
-> 若使用远程桌面（WIN 到 MAC）部署脚本或在 WIN 中编写后传输到 MAC 中；请参照 [附录 换行符转换](#附录-换行符转换) 来将换行符转换为 LF
+> 若使用远程桌面或在 WIN 中编写后传输到 MAC；请参照 [附录 换行符转换](#附录-换行符转换)
 
 > [!WARNING]
-> 若初始化失败，请按下列步骤修改 `run_alas.sh` 文件  
+> 若初始化 Conda 失败，请按下列步骤修改 `run_alas.sh` 文件  
 > 1. 注释/删除 `conda init`，后尝试使用 `eval "$(conda shell.bash hook)"` 来初始化 Conda  
-> 2. 若`eval "$(conda shell.bash hook)"` 初始化 Conda失败，则尝试在初始化 Conda 前激活环境变量 `source ~/.zshrc`  
-> 3. 若激活环境变量后依旧初始化失败，请尝试将 `eval "$(conda shell.bash hook)"` 替换为 `conda init`  
+> 2. 若依旧失败，则尝试在初始化 Conda 前激活环境变量 `source ~/.zshrc`  
+> 3. 若激活环境变量后依旧失败，请尝试将 `eval "$(conda shell.bash hook)"` 替换为 `conda init`  
 > 4. 若以上步骤均无效，请提交 Issues
 
 > [!CAUTION] 
@@ -521,7 +521,7 @@ chmod +x run_alas.sh
 
 ## 附录 换行符转换
 
-若使用远程桌面（WIN 到 MAC）部署脚本或在 WIN 中编写后传输到 MAC 中；
+若使用远程桌面（WIN 到 MAC）部署脚本或在 WIN 中编写后传输到 MAC 中；  
 请使用 `dos2unix` 将脚本文件换行符转换为 UNIX 标准。
 
 ```bash
