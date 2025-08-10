@@ -44,6 +44,7 @@ source ~/.zshrc
 4. 验证安装
 
 ```bash
+# 检查 HomeBrew 版本号
 brew --version
 ```
 
@@ -64,10 +65,13 @@ brew install miniforge git android-platform-tools
 2. 在终端逐行运行下列命令，验证是否安装成功
 
 ```bash
+# 检查 Adb 版本号
 adb --version
 
+# 检查 Git 版本号
 git --version
 
+# 检查 Conda 版本号
 conda --version
 ```
 
@@ -102,8 +106,6 @@ cd AzurLaneAutoScript
 ```bash
 touch environment.yml
 ```
-
-- 或从本仓库中下载 [environment.yml](./environment.yml) 文件，后放置到 ALAS 目录下
 
 <details>
 <summary>
@@ -330,6 +332,9 @@ dependencies:
 
 </details>
 
+> [!TIP]
+> 或从本仓库中下载 [environment.yml](./environment.yml) 文件，后放置到 ALAS 目录下
+
 ---
 
 > [!IMPORTANT]
@@ -366,7 +371,7 @@ conda env create -f environment.yml
 # 需要激活虚拟环境，才能进行下一步
 conda activate alas
 
-# 安装 libgfortran5
+# 安装指定版本的 libgfortran5
 conda install "libgfortran5>=14"
 ```
 
@@ -422,6 +427,9 @@ Adb:
 
 ---
 
+> [TIP]
+> 当见到 ALAS 的图形界面后，可随时关闭浏览器，只要这个终端没关闭，ALAS 就不会终止运行
+
 ## 7. 运行 ALAS
 
 1. 激活环境
@@ -445,16 +453,27 @@ python gui.py
 
 4. 打开浏览器访问 `http://127.0.0.1:22267`，即可看到 ALAS 的图形界面
 
-   - 可随时关闭浏览器，只要终端没关闭，ALAS 就不会终止运行
-
 ---
 
-> [!NOTE]
-> 后续可直接运行 sh 脚本，而不是按照步骤 7. 来运行 ALAS
+> [!IMPORTANT]
+> 后续可直接运行 sh 脚本，而不是按照步骤 7. 来运行 ALAS  
+> 若使用远程桌面（WIN 到 MAC）部署脚本或在 WIN 中编写后传输到 MAC 中；请参照 [附录 换行符转换](#附录-换行符转换) 来将换行符转换为 LF
+
+> [!WARNING]
+> 若初始化失败，请按下列步骤修改 `run_alas.sh` 文件  
+> 1. 注释/删除 `conda init`，后尝试使用 `eval "$(conda shell.bash hook)"` 来初始化 Conda  
+> 2. 若`eval "$(conda shell.bash hook)"` 初始化 Conda失败，则尝试在初始化 Conda 前激活环境变量 `source ~/.zshrc`  
+> 3. 若激活环境变量后依旧初始化失败，请尝试将 `eval "$(conda shell.bash hook)"` 替换为 `conda init`  
+> 4. 若以上步骤均无效，请提交 Issues
+
+> [!CAUTION] 
+> 使用脚本运行前，必须进行下列操作：  
+> 修改 `cd /Users/<yourname>/AzurLaneAutoScript` 为你实际路径  
+> 修改脚本文件权限
 
 ## 8. 使用脚本运行 ALAS
 
-创建并配置 run_alas.sh 文件
+创建并配置 `run_alas.sh` 文件
 
 1. 在终端执行下列代码，创建脚本文件
 
@@ -467,14 +486,20 @@ touch run_alas.sh
 ```bash
 #!/bin/bash
 
+# 激活环境变量
+# source ~/.zshrc
+
 # 初始化 Conda
 conda init
+# 若激活失败，请注释/删除 conda init，后尝试使用 eval "$(conda shell.bash hook)" 来初始化 Conda
+# eval "$(conda shell.bash hook)"
 
 # 激活 alas 环境
 conda activate alas
 
 # 切换到 alas 目录
 cd /Users/<yourname>/AzurLaneAutoScript
+# 手动修改该行中的路径为你的 alas 目录，例：/Users/Dreamry2C/AzurLaneAutoScript 或者 /Users/NEANC/Downloads/AzurLaneAutoScript
 
 # 运行 gui.py
 python gui.py
@@ -502,6 +527,9 @@ chmod +x run_alas.sh
 ```bash
 # 安装 dos2unix
 brew install dos2unix
+
+# 验证 dos2unix 版本
+dos2unix --version
 
 # 使用 dos2unix 转换换行符
 dos2unix run_alas.sh
