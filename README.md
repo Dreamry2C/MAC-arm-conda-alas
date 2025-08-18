@@ -100,7 +100,7 @@ cd AzurLaneAutoScript
 > environment.yml 定义了 ALAS 虚拟环境配置
 
 > [!TIP]
-> 也可从本仓库中下载 [environment.yml](./environment.yml) 文件，后放置到 ALAS 目录中
+> 也可使用本仓库的 [environment.yml](./environment.yml) 文件
 
 ## 4. 创建并配置 environment.yml 文件
 
@@ -501,7 +501,7 @@ conda activate alas
 
 # 切换到 ALAS 目录
 cd /Users/<yourname>/AzurLaneAutoScript
-# 手动修改该行中的路径为你的 ALAS 目录，例：/Users/Dreamry2C/AzurLaneAutoScript 或 /Users/NEANC/Downloads/AzurLaneAutoScript
+# 手动修改该行中的路径为 ALAS 目录，例：/Users/Dreamry2C/AzurLaneAutoScript 或 /Users/NEANC/Downloads/AzurLaneAutoScript
 
 # 运行 gui.py
 python gui.py
