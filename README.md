@@ -99,6 +99,9 @@ cd AzurLaneAutoScript
 > [!NOTE]
 > environment.yml 定义了 ALAS 虚拟环境配置
 
+> [!TIP]
+> 也可使用本仓库的 [environment.yml](./environment.yml) 文件
+
 ## 4. 创建并配置 environment.yml 文件
 
 1. 在终端中输入下列命令为 ALAS 目录下新建名为 `environment.yml` 的文件
@@ -107,12 +110,11 @@ cd AzurLaneAutoScript
 touch environment.yml
 ```
 
-> [!TIP]
-> 或从本仓库中下载 [environment.yml](./environment.yml) 文件，放置到 ALAS 目录下
+2. 打开文件 `environment.yml` 并填入下列内容，后保存关闭
 
-<details>
+<details open>
 <summary>
-2. 打开文件 environment.yml 并填入被折叠的内容
+📌 点击本行即可折叠下列内容
 </summary>
 
 ```yaml
@@ -341,7 +343,7 @@ dependencies:
 > 如果部分依赖无法安装，请重复执行步骤 5-2
 
 > [!WARNING]
-> 步骤 5-2 以及 CAUTION 部分必须要在虚拟环境内执行
+> 步骤 5-2 与 Caution 部分必须在虚拟环境中运行
 
 ## 5. 创建并配置虚拟环境
 
@@ -364,8 +366,8 @@ conda env create -f environment.yml
     ```
 
 > [!CAUTION]
-> 更新至 macOS v15.4.1 版本后，虚拟环境出错(错误信息参照 [#4](https://github.com/Dreamry2C/MAC-arm-conda-alas/issues/4))，在终端激活虚拟环境后请尝试运行下列命令  
-> 若还是出错，请尝试删除 [ALAS 虚拟环境](#附录-删除虚拟环境) 后重新执行 [步骤 5](#5-创建并配置虚拟环境)
+> 1. 更新至 macOS v15.4.1 版本后，虚拟环境出错(错误信息参照 [#4](https://github.com/Dreamry2C/MAC-arm-conda-alas/issues/4))，在终端激活虚拟环境后运行下列命令  
+> 2. 若还是出错，请尝试删除 [ALAS 虚拟环境](#附录-删除虚拟环境) 后重新执行 [步骤 5](#5-创建并配置虚拟环境)
 
 ```bash
 # 安装指定版本的 libgfortran5
@@ -376,6 +378,9 @@ conda install "libgfortran5>=14"
 [MacOS Sequoia 15.4.1 更新引发了重复 R 路径的错误](https://stackoverflow.com/a/79592182)
 
 ---
+
+> [!IMPORTANT]
+> 步骤 6. 需要在 ALAS 目录下操作
 
 ## 6. 配置 config/deploy.yaml
 
@@ -457,7 +462,7 @@ python gui.py
 > 若使用远程桌面或在 WIN 中编写后传输到 MAC；请参照 [附录 换行符转换](#附录-换行符转换)
 
 > [!WARNING]
-> 若初始化 Conda 失败，请按下列步骤修改 `run_alas.sh` 文件  
+> 若初始化 Conda 失败，请按下列步骤修改 `run_alas.sh` 文件：  
 > 1. 注释/删除 `conda init`，后尝试使用 `eval "$(conda shell.bash hook)"` 来初始化 Conda  
 > 2. 若依旧失败，则尝试在初始化 Conda 前激活环境变量 `source ~/.zshrc`  
 > 3. 若激活环境变量后依旧失败，请尝试将 `eval "$(conda shell.bash hook)"` 替换为 `conda init`  
@@ -465,8 +470,8 @@ python gui.py
 
 > [!CAUTION] 
 > 使用脚本运行前，必须进行下列操作：  
-> 修改 `cd /Users/<yourname>/AzurLaneAutoScript` 为你实际路径  
-> 修改脚本文件权限
+> 1. 修改 `cd /Users/<yourname>/AzurLaneAutoScript` 为实际路径  
+> 2. 修改脚本文件权限
 
 ## 8. 使用脚本运行 ALAS
 
@@ -494,9 +499,9 @@ conda init
 # 激活 alas 环境
 conda activate alas
 
-# 切换到 alas 目录
+# 切换到 ALAS 目录
 cd /Users/<yourname>/AzurLaneAutoScript
-# 手动修改该行中的路径为你的 alas 目录，例：/Users/Dreamry2C/AzurLaneAutoScript 或 /Users/NEANC/Downloads/AzurLaneAutoScript
+# 手动修改该行中的路径为 ALAS 目录，例：/Users/Dreamry2C/AzurLaneAutoScript 或 /Users/NEANC/Downloads/AzurLaneAutoScript
 
 # 运行 gui.py
 python gui.py
