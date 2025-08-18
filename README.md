@@ -99,6 +99,9 @@ cd AzurLaneAutoScript
 > [!NOTE]
 > environment.yml 定义了 ALAS 虚拟环境配置
 
+> [!TIP]
+> 也可从本仓库中下载 [environment.yml](./environment.yml) 文件，后放置到 ALAS 目录中
+
 ## 4. 创建并配置 environment.yml 文件
 
 1. 在终端中输入下列命令为 ALAS 目录下新建名为 `environment.yml` 的文件
@@ -106,9 +109,6 @@ cd AzurLaneAutoScript
 ```bash
 touch environment.yml
 ```
-
-> [!TIP]
-> 或从本仓库中下载 [environment.yml](./environment.yml) 文件，放置到 ALAS 目录下
 
 2. 打开文件 `environment.yml` 并填入下列内容，后保存关闭
 
