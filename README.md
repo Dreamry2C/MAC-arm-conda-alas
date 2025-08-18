@@ -110,9 +110,11 @@ touch environment.yml
 > [!TIP]
 > 或从本仓库中下载 [environment.yml](./environment.yml) 文件，放置到 ALAS 目录下
 
-<details>
+2. 打开文件 `environment.yml` 并填入下列内容，后保存关闭
+
+<details open>
 <summary>
-2. 打开文件 environment.yml 并填入被折叠的内容
+📌 点击本行即可折叠下列内容
 </summary>
 
 ```yaml
