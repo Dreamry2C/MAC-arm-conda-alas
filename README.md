@@ -31,11 +31,8 @@
 3. 配置环境变量，在终端中逐行运行下列命令
 
 ```bash
-# 创建 .zshrc
+# 创建 .zshrc，并写入 Homebrew 环境变量配置
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc
-
-# 添加环境变量
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # 激活环境变量
 source ~/.zshrc
@@ -387,7 +384,7 @@ conda install "libgfortran5>=14"
 1. 在终端运行下列命令，重命名 `deploy.yaml` 文件
 
 ```bash
- cp config/deploy.template-cn.yaml config/deploy.yaml
+cp config/deploy.template-cn.yaml config/deploy.yaml
 ```
 
 > [!TIP]
