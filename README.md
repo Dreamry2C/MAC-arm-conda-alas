@@ -463,10 +463,9 @@ python gui.py
 
 > [!WARNING]
 > 若初始化 Conda 失败，请按下列步骤修改 `run_alas.sh` 文件：  
-> 1. 注释/删除 `conda init`，后尝试使用 `eval "$(conda shell.bash hook)"` 来初始化 Conda  
-> 2. 若依旧失败，则尝试在初始化 Conda 前激活环境变量 `source ~/.zshrc`  
-> 3. 若激活环境变量后依旧失败，请尝试将 `eval "$(conda shell.bash hook)"` 替换为 `conda init`  
-> 4. 若以上步骤均无效，请提交 Issues
+> 1. 若使用 `eval "$(conda shell.bash hook)"` 初始化 Conda 失败，请在初始化 Conda 前激活环境变量 `source ~/.zshrc`  
+> 2. 若 `1.` 失败请使用 `conda init` 来初始化 Conda  
+> 3. 若以上步骤均无效，请提交 Issues
 
 > [!CAUTION] 
 > 使用脚本运行前，必须进行下列操作：  
@@ -492,9 +491,9 @@ touch run_alas.sh
 # source ~/.zshrc
 
 # 初始化 Conda
-conda init
-# 若激活失败，请注释/删除 conda init，后尝试使用 eval "$(conda shell.bash hook)" 来初始化 Conda
-# eval "$(conda shell.bash hook)"
+eval "$(conda shell.bash hook)"
+# 若激活失败，请注释/删除 eval "$(conda shell.bash hook)"，后尝试使用 conda init 来初始化 Conda
+# conda init
 
 # 激活 alas 环境
 conda activate alas
@@ -502,6 +501,10 @@ conda activate alas
 # 切换到 ALAS 目录
 cd /Users/<yourname>/AzurLaneAutoScript
 # 手动修改该行中的路径为 ALAS 目录，例：/Users/Dreamry2C/AzurLaneAutoScript 或 /Users/NEANC/Downloads/AzurLaneAutoScript
+
+# 打开测览器访问 ALAS WEB GUI
+open http://127.0.0.1:22267
+# 若不需要自动打开浏览器，请注释/删除该命令
 
 # 运行 gui.py
 python gui.py
@@ -519,7 +522,15 @@ chmod +x run_alas.sh
 ./run_alas.sh
 ```
 
-5. 打开浏览器访问 `http://127.0.0.1:22267`
+---
+
+## 附录 ALAS 运行后自动运行指定配置
+
+修改 `./config/deploy.yaml` 中的 `Run` 参数，示例已在配置中列出
+
+![Run 参数详细](./Image/deploy-RUN.png)
+
+---
 
 ## 附录 换行符转换
 
