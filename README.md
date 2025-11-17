@@ -456,7 +456,8 @@ python gui.py
 
 > [!IMPORTANT]
 > 后续可直接运行 sh 脚本，而不是按照步骤 7. 来运行 ALAS  
-> 若使用远程桌面或在 WIN 中编写后传输到 MAC；请参照 [附录 换行符转换](#附录-换行符转换)
+> 若使用远程桌面或在 WIN 中编写后传输到 MAC；请参照 [附录 换行符转换](#附录-换行符转换)  
+> 或使用本仓库的 [run_alas.sh](./run_alas.sh) 文件
 
 > [!WARNING]
 > 若初始化 Conda 失败，请按下列步骤修改 `run_alas.sh` 文件：  
@@ -467,10 +468,7 @@ python gui.py
 > [!CAUTION] 
 > 使用脚本运行前，必须进行下列操作：  
 > 1. 修改 `cd /Users/<yourname>/AzurLaneAutoScript` 为实际路径  
-> 2. 修改脚本文件权限
-
-> [!TIP]
-> 也可使用本仓库的 [run_alas.sh](./run_alas.sh) 文件
+> 2. 修改脚本文件权限 `chmod +x run_alas.sh`
 
 ## 8. 使用脚本运行 ALAS
 
