@@ -96,10 +96,292 @@ cd AzurLaneAutoScript
 > [!NOTE]
 > environment.yml 定义了 ALAS 虚拟环境配置
 
-> [!TIP]
-> 也可使用本仓库的 [environment.yml](./environment.yml) 文件
+## 4. 下载 environment.yml 文件
 
-## 4. 创建并配置 environment.yml 文件
+1. 在终端中输入下列命令下载 `environment.yml` 文件
+
+```bash
+curl -O https://raw.githubusercontent.com/Dreamry2C/MAC-arm-conda-alas/master/environment.yml
+```
+
+> [!TIP]
+> 若下载失败可使用国内源/代理加速，若均失败请阅读 [附录 配置 environment.yml 文件](#附录-配置-environmentyml-文件)
+
+---
+
+> [!IMPORTANT]
+> 如果部分依赖无法安装，请重复执行步骤 5-2
+
+> [!WARNING]
+> 步骤 5-2 与 Caution 部分必须在虚拟环境中运行
+
+## 5. 创建并配置虚拟环境
+
+1. 在 ALAS 目录下运行下列命令：
+
+```bash
+conda env create -f environment.yml
+```
+
+2. 如果部分依赖无法安装，出现类似 `No matching distribution found for XXX` 的报错:
+
+- 在命令行使用 `conda install <无法安装的包名>` 独立安装，例如 `conda install python-graphviz==0.8.4`
+  - 安装成功后，打开 `environment.yml` 文件，将对应依赖用 `#` 注释掉，例如 `#- python-graphviz==0.8.4`
+    - 保存后在终端运行下列命令
+
+    ```bash
+    conda env update --name alas --file environment.yml
+    ```
+
+> [!CAUTION]
+>
+> 1. 更新至 macOS v15.4.1 版本后，虚拟环境出错(错误信息参照 [#4](https://github.com/Dreamry2C/MAC-arm-conda-alas/issues/4))，在终端激活虚拟环境后运行下列命令
+> 2. 若还是出错，请尝试删除 [ALAS 虚拟环境](#附录-删除虚拟环境) 后重新执行 [步骤 5](#5-创建并配置虚拟环境)
+
+```bash
+# 安装指定版本的 libgfortran5
+conda install "libgfortran5>=14"
+```
+
+文献来源：
+[MacOS Sequoia 15.4.1 更新引发了重复 R 路径的错误](https://stackoverflow.com/a/79592182)
+
+---
+
+> [!IMPORTANT]
+> 步骤 6. 需要在 ALAS 目录下操作
+
+## 6. 配置 config/deploy.yaml
+
+1. 在终端运行下列命令，重命名 `deploy.yaml` 文件
+
+```bash
+cp config/deploy.template-cn.yaml config/deploy.yaml
+```
+
+> [!TIP]
+> 若未找到对应路径，请重启终端后再试
+
+2. 在终端逐行运行下列命令，分别查看并记录 `Git`、`Python`、`Adb` 的安装路径
+
+```bash
+# 查找 Git
+which git
+
+# 查找 Python
+which python
+
+# 查找 Adb
+which adb
+```
+
+3. 打开 ALAS 目录下的 `config/deploy.yaml` 文件，找到并替换路径
+
+```yaml
+Git:
+  # Filepath of git executable
+  GitExecutable: ./toolkit/Git/mingw64/bin/git.exe
+  # 把 which git 得到的地址替换这里，例如/usr/bin/git
+
+Python:
+  # Filepath of python executable
+  PythonExecutable: ./toolkit/python.exe
+  # 把 which python 得到的地址替换这里，例如/opt/homebrew/Caskroom/miniforge/base/envs/alas/bin/python3
+
+Adb:
+  # Filepath of ADB executable
+  AdbExecutable: ./toolkit/Lib/site-packages/adbutils/binaries/adb.exe
+  # 把 which adb 得到的地址替换这里
+```
+
+4. 阅读 [ALAS 安装 WIKI](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn) ，根据 [编辑安装设置](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn#%E7%BC%96%E8%BE%91%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE) 一节修改 `config/deploy.yaml` 文件
+
+---
+
+> [!TIP]
+> 当 ALAS WEB GUI 正确运行后，只要这个终端没关闭，ALAS 就不会终止运行
+
+## 7. 运行 ALAS
+
+1. 激活环境
+
+```bash
+# 激活 ALAS 虚拟环境
+conda activate alas
+```
+
+2. 进入脚本目录
+
+```bash
+cd AzurLaneAutoScript
+```
+
+3. 运行 GUI
+
+```bash
+python gui.py
+```
+
+4. 打开浏览器访问 `http://127.0.0.1:22267`，即可看到 ALAS WEB GUI
+
+---
+
+> [!IMPORTANT]
+> 后续可直接运行 sh 脚本，而不是按照步骤 7. 来运行 ALAS  
+> 若使用远程桌面或在 WIN 中编写后传输到 MAC；请参照 [附录 换行符转换](#附录-换行符转换)  
+> 或使用本仓库的 [run_alas.sh](./run_alas.sh) 文件
+
+> [!WARNING]
+> 若初始化 Conda 失败，请按下列步骤修改 `run_alas.sh` 文件：
+>
+> 1. 若使用 `eval "$(conda shell.bash hook)"` 初始化 Conda 失败，请在初始化 Conda 前激活环境变量 `source ~/.zshrc`
+> 2. 若 `1.` 失败请使用 `conda init` 来初始化 Conda
+> 3. 若以上步骤均无效，请提交 Issues
+
+> [!CAUTION]
+> 使用脚本运行前，必须进行下列操作：
+>
+> 1. 修改 `cd /Users/<yourname>/AzurLaneAutoScript` 为实际路径
+> 2. 修改脚本文件权限 `chmod +x run_alas.sh`
+
+## 8. 使用脚本运行 ALAS
+
+1. 在终端中输入下列命令下载 `run_alas.sh` 文件
+
+```bash
+curl -O https://raw.githubusercontent.com/Dreamry2C/MAC-arm-conda-alas/master/run_alas.sh
+```
+
+2. 根据注释修改 `run_alas.sh` 文件中的路径和环境变量配置
+
+<details>
+<summary>
+或 手动创建并配置 `run_alas.sh` 文件
+
+📌 点击本行即可展开下列内容
+
+</summary>
+
+1-1. 在终端执行下列代码，创建脚本文件
+
+```bash
+touch run_alas.sh
+```
+
+2-1. 编辑脚本文件
+
+```bash
+#!/bin/bash
+
+# 最小化当前终端窗口
+osascript -e 'tell application "Terminal" to set miniaturized of front window to true'
+
+# 激活环境变量
+# source ~/.zshrc
+
+# 初始化 Conda
+eval "$(conda shell.bash hook)"
+# 若激活失败，请注释/删除 eval "$(conda shell.bash hook)"，后尝试使用 conda init 来初始化 Conda
+# conda init
+
+# 激活 alas 环境
+conda activate alas
+
+# 切换到 ALAS 目录
+cd /Users/<yourname>/AzurLaneAutoScript
+# 手动修改该行中的路径为 ALAS 目录，例：/Users/Dreamry2C/AzurLaneAutoScript 或 /Users/NEANC/Downloads/AzurLaneAutoScript
+
+# 延迟2秒后打开测览器访问 ALAS WEB GUI
+(sleep 2 && open http://127.0.0.1:22267) &
+# 若不需要自动打开浏览器，请注释/删除该命令
+
+# 运行 gui.py
+python gui.py
+```
+
+</details>
+
+3. 修改脚本文件权限
+
+```bash
+chmod +x run_alas.sh
+```
+
+4. 运行脚本
+
+```bash
+./run_alas.sh
+```
+
+---
+
+## 附录 ALAS 运行后自动运行指定配置
+
+修改 `./config/deploy.yaml` 中的 `Run` 参数，示例已在配置中列出
+
+![Run 参数详细](./Image/deploy-RUN.png)
+
+---
+
+## 附录 换行符转换
+
+若使用远程桌面（WIN 到 MAC）部署脚本或在 WIN 中编写后传输到 MAC 中；  
+请使用 `dos2unix` 将脚本文件换行符转换为 UNIX 标准。
+
+```bash
+# 安装 dos2unix
+brew install dos2unix
+
+# 验证 dos2unix 版本
+dos2unix --version
+
+# 使用 dos2unix 转换换行符
+dos2unix run_alas.sh
+```
+
+---
+
+## 附录 手动安装 Miniforge
+
+1. 点击 [Miniforge3](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)，直接下载安装包
+
+2. 运行安装脚本，根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
+
+```bash
+# 进入下载目录
+cd downloads
+
+# 运行安装脚本
+bash Miniforge3-MacOSX-arm64.sh
+```
+
+3. 验证安装
+
+```bash
+conda --version
+```
+
+---
+
+## 附录 删除虚拟环境
+
+```bash
+# 退出虚拟环境
+conda deactivate
+
+# 查看虚拟环境列表
+conda env list
+
+# 删除 ALAS 虚拟环境
+conda remove -n  alas --all
+
+# 若重命名过 ALAS 虚拟环境，请自行参照下列命令自行删除虚拟环境
+conda remove -n 需要删除的环境名 --all
+```
+
+---
+
+## 附录 配置 environment.yml 文件
 
 1. 在终端中输入下列命令为 ALAS 目录下新建名为 `environment.yml` 的文件
 
@@ -109,9 +391,9 @@ touch environment.yml
 
 2. 打开文件 `environment.yml` 并填入下列内容，后保存关闭
 
-<details open>
+<details>
 <summary>
-📌 点击本行即可折叠下列内容
+📌 点击本行即可展开下列内容
 </summary>
 
 ```yaml
@@ -333,261 +615,6 @@ dependencies:
 ```
 
 </details>
-
----
-
-> [!IMPORTANT]
-> 如果部分依赖无法安装，请重复执行步骤 5-2
-
-> [!WARNING]
-> 步骤 5-2 与 Caution 部分必须在虚拟环境中运行
-
-## 5. 创建并配置虚拟环境
-
-1. 在 ALAS 目录下运行下列命令：
-
-```bash
-conda env create -f environment.yml
-```
-
-2. 如果部分依赖无法安装，出现类似 `No matching distribution found for XXX` 的报错:
-
-- 在命令行使用 `conda install <无法安装的包名>` 独立安装，例如 `conda install python-graphviz==0.8.4`
-
-  - 安装成功后，打开 `environment.yml` 文件，将对应依赖用 `#` 注释掉，例如 `#- python-graphviz==0.8.4`
-
-    - 保存后在终端运行下列命令
-
-    ```bash
-    conda env update --name alas --file environment.yml
-    ```
-
-> [!CAUTION]
-> 1. 更新至 macOS v15.4.1 版本后，虚拟环境出错(错误信息参照 [#4](https://github.com/Dreamry2C/MAC-arm-conda-alas/issues/4))，在终端激活虚拟环境后运行下列命令  
-> 2. 若还是出错，请尝试删除 [ALAS 虚拟环境](#附录-删除虚拟环境) 后重新执行 [步骤 5](#5-创建并配置虚拟环境)
-
-```bash
-# 安装指定版本的 libgfortran5
-conda install "libgfortran5>=14"
-```
-
-文献来源：
-[MacOS Sequoia 15.4.1 更新引发了重复 R 路径的错误](https://stackoverflow.com/a/79592182)
-
----
-
-> [!IMPORTANT]
-> 步骤 6. 需要在 ALAS 目录下操作
-
-## 6. 配置 config/deploy.yaml
-
-1. 在终端运行下列命令，重命名 `deploy.yaml` 文件
-
-```bash
-cp config/deploy.template-cn.yaml config/deploy.yaml
-```
-
-> [!TIP]
-> 若未找到对应路径，请重启终端后再试
-
-2. 在终端逐行运行下列命令，分别查看并记录 `Git`、`Python`、`Adb` 的安装路径
-
-```bash
-# 查找 Git
-which git
-
-# 查找 Python
-which python
-
-# 查找 Adb
-which adb
-```
-
-3. 打开 ALAS 目录下的 `config/deploy.yaml` 文件，找到并替换路径
-
-```yaml
-Git:
-  # Filepath of git executable
-  GitExecutable: ./toolkit/Git/mingw64/bin/git.exe
-  # 把 which git 得到的地址替换这里，例如/usr/bin/git
-
-Python:
-  # Filepath of python executable
-  PythonExecutable: ./toolkit/python.exe
-  # 把 which python 得到的地址替换这里，例如/opt/homebrew/Caskroom/miniforge/base/envs/alas/bin/python3
-
-Adb:
-  # Filepath of ADB executable
-  AdbExecutable: ./toolkit/Lib/site-packages/adbutils/binaries/adb.exe
-  # 把 which adb 得到的地址替换这里
-```
-
-4. 阅读 [ALAS 安装 WIKI](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn) ，根据 [编辑安装设置](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn#%E7%BC%96%E8%BE%91%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE) 一节修改 `config/deploy.yaml` 文件
-
----
-
-> [!TIP]
-> 当 ALAS WEB GUI 正确运行后，只要这个终端没关闭，ALAS 就不会终止运行
-
-## 7. 运行 ALAS
-
-1. 激活环境
-
-```bash
-# 激活 ALAS 虚拟环境
-conda activate alas
-```
-
-2. 进入脚本目录
-
-```bash
-cd AzurLaneAutoScript
-```
-
-3. 运行 GUI
-
-```bash
-python gui.py
-```
-
-4. 打开浏览器访问 `http://127.0.0.1:22267`，即可看到 ALAS WEB GUI
-
----
-
-> [!IMPORTANT]
-> 后续可直接运行 sh 脚本，而不是按照步骤 7. 来运行 ALAS  
-> 若使用远程桌面或在 WIN 中编写后传输到 MAC；请参照 [附录 换行符转换](#附录-换行符转换)  
-> 或使用本仓库的 [run_alas.sh](./run_alas.sh) 文件
-
-> [!WARNING]
-> 若初始化 Conda 失败，请按下列步骤修改 `run_alas.sh` 文件：  
-> 1. 若使用 `eval "$(conda shell.bash hook)"` 初始化 Conda 失败，请在初始化 Conda 前激活环境变量 `source ~/.zshrc`  
-> 2. 若 `1.` 失败请使用 `conda init` 来初始化 Conda  
-> 3. 若以上步骤均无效，请提交 Issues
-
-> [!CAUTION] 
-> 使用脚本运行前，必须进行下列操作：  
-> 1. 修改 `cd /Users/<yourname>/AzurLaneAutoScript` 为实际路径  
-> 2. 修改脚本文件权限 `chmod +x run_alas.sh`
-
-## 8. 使用脚本运行 ALAS
-
-创建并配置 `run_alas.sh` 文件
-
-1. 在终端执行下列代码，创建脚本文件
-
-```bash
-touch run_alas.sh
-```
-
-2. 编辑脚本文件
-
-```bash
-#!/bin/bash
-
-# 最小化当前终端窗口
-osascript -e 'tell application "Terminal" to set miniaturized of front window to true'
-
-# 激活环境变量
-# source ~/.zshrc
-
-# 初始化 Conda
-eval "$(conda shell.bash hook)"
-# 若激活失败，请注释/删除 eval "$(conda shell.bash hook)"，后尝试使用 conda init 来初始化 Conda
-# conda init
-
-# 激活 alas 环境
-conda activate alas
-
-# 切换到 ALAS 目录
-cd /Users/<yourname>/AzurLaneAutoScript
-# 手动修改该行中的路径为 ALAS 目录，例：/Users/Dreamry2C/AzurLaneAutoScript 或 /Users/NEANC/Downloads/AzurLaneAutoScript
-
-# 延迟2秒后打开测览器访问 ALAS WEB GUI
-(sleep 2 && open http://127.0.0.1:22267) &
-# 若不需要自动打开浏览器，请注释/删除该命令
-
-# 运行 gui.py
-python gui.py
-```
-
-3. 修改脚本文件权限
-
-```bash
-chmod +x run_alas.sh
-```
-
-4. 运行脚本
-
-```bash
-./run_alas.sh
-```
-
----
-
-## 附录 ALAS 运行后自动运行指定配置
-
-修改 `./config/deploy.yaml` 中的 `Run` 参数，示例已在配置中列出
-
-![Run 参数详细](./Image/deploy-RUN.png)
-
----
-
-## 附录 换行符转换
-
-若使用远程桌面（WIN 到 MAC）部署脚本或在 WIN 中编写后传输到 MAC 中；  
-请使用 `dos2unix` 将脚本文件换行符转换为 UNIX 标准。
-
-```bash
-# 安装 dos2unix
-brew install dos2unix
-
-# 验证 dos2unix 版本
-dos2unix --version
-
-# 使用 dos2unix 转换换行符
-dos2unix run_alas.sh
-```
-
----
-
-## 附录 手动安装 Miniforge
-
-1. 点击 [Miniforge3](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh)，直接下载安装包
-
-2. 运行安装脚本，根据提示，一路输入回车，待弹出 `yes or no` 后再输入 `yes` 完成安装
-
-```bash
-# 进入下载目录
-cd downloads
-
-# 运行安装脚本
-bash Miniforge3-MacOSX-arm64.sh
-```
-
-3. 验证安装
-
-```bash
-conda --version
-```
-
----
-
-## 附录 删除虚拟环境
-
-```bash
-# 退出虚拟环境
-conda deactivate
- 
-# 查看虚拟环境列表
-conda env list
-
-# 删除 ALAS 虚拟环境
-conda remove -n  alas --all
-
-# 若重命名过 ALAS 虚拟环境，请自行参照下列命令自行删除虚拟环境
-conda remove -n 需要删除的环境名 --all
-```
 
 ---
 
