@@ -134,8 +134,7 @@ conda env create -f environment.yml
     ```
 
 > [!CAUTION]
->
-> 1. 更新至 macOS v15.4.1 版本后，虚拟环境出错(错误信息参照 [#4](https://github.com/Dreamry2C/MAC-arm-conda-alas/issues/4))，在终端激活虚拟环境后运行下列命令
+> 1. 更新至 macOS v15.4.1 版本后，虚拟环境出错(错误信息参照 [#4](https://github.com/Dreamry2C/MAC-arm-conda-alas/issues/4))，在终端激活虚拟环境后运行下列命令  
 > 2. 若还是出错，请尝试删除 [ALAS 虚拟环境](#附录-删除虚拟环境) 后重新执行 [步骤 5](#5-创建并配置虚拟环境)
 
 ```bash
@@ -149,52 +148,16 @@ conda install "libgfortran5>=14"
 ---
 
 > [!IMPORTANT]
-> 步骤 6. 需要在 ALAS 目录下操作
+> 步骤 6. 需要在 ALAS 目录下操作  
+> 该预设已经配置好地址与依赖路径，正常情况下无需再次修改
 
 ## 6. 配置 config/deploy.yaml
 
 1. 在终端运行下列命令，重命名 `deploy.yaml` 文件
 
 ```bash
-cp config/deploy.template-cn.yaml config/deploy.yaml
+cp config/deploy.template-linux-cn.yaml config/deploy.yaml
 ```
-
-> [!TIP]
-> 若未找到对应路径，请重启终端后再试
-
-2. 在终端逐行运行下列命令，分别查看并记录 `Git`、`Python`、`Adb` 的安装路径
-
-```bash
-# 查找 Git
-which git
-
-# 查找 Python
-which python
-
-# 查找 Adb
-which adb
-```
-
-3. 打开 ALAS 目录下的 `config/deploy.yaml` 文件，找到并替换路径
-
-```yaml
-Git:
-  # Filepath of git executable
-  GitExecutable: ./toolkit/Git/mingw64/bin/git.exe
-  # 把 which git 得到的地址替换这里，例如/usr/bin/git
-
-Python:
-  # Filepath of python executable
-  PythonExecutable: ./toolkit/python.exe
-  # 把 which python 得到的地址替换这里，例如/opt/homebrew/Caskroom/miniforge/base/envs/alas/bin/python3
-
-Adb:
-  # Filepath of ADB executable
-  AdbExecutable: ./toolkit/Lib/site-packages/adbutils/binaries/adb.exe
-  # 把 which adb 得到的地址替换这里
-```
-
-4. 阅读 [ALAS 安装 WIKI](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn) ，根据 [编辑安装设置](https://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Installation_cn#%E7%BC%96%E8%BE%91%E5%AE%89%E8%A3%85%E8%AE%BE%E7%BD%AE) 一节修改 `config/deploy.yaml` 文件
 
 ---
 
@@ -223,6 +186,9 @@ python gui.py
 ```
 
 4. 打开浏览器访问 `http://127.0.0.1:22267`，即可看到 ALAS WEB GUI
+
+> [!CAUTION]
+> 若报告未找到 `Git`、`Python`、`Adb` 路径，请阅读 [附录 填写依赖路径](#附录-填写依赖路径)
 
 ---
 
@@ -615,6 +581,51 @@ dependencies:
 ```
 
 </details>
+
+---
+
+## 附录 填写依赖路径
+
+> [!TIP]
+> 若未找到对应路径，请重启终端后再试
+
+1. 在终端逐行运行下列命令，分别查看并记录 `Git`、`Python`、`Adb` 的安装路径
+
+```bash
+# 查找 Git
+which git
+
+# 查找 Python
+which python
+
+# 查找 Adb
+which adb
+```
+
+2. 打开 ALAS 目录下的 `config/deploy.yaml` 文件，找到并替换路径
+
+```yaml
+Git:
+    # Filepath of git executable `git.exe`
+    # [Easy installer] Use './toolkit/Git/mingw64/bin/git.exe'
+    # [Other] Use you own git
+    GitExecutable: /usr/bin/git
+    # 把 which git 得到的地址替换这里，例如/usr/bin/git
+
+  Python:
+    # Filepath of python executable `python.exe`
+    # [Easy installer] Use './toolkit/python.exe'
+    # [Other] Use you own python, and its version should be 3.7.6 64bit
+    PythonExecutable: python
+    # 把 which python 得到的地址替换这里，例如/opt/homebrew/Caskroom/miniforge/base/envs/alas/bin/python3
+
+  Adb:
+    # Filepath of ADB executable `adb.exe`
+    # [Easy installer] Use './toolkit/Lib/site-packages/adbutils/binaries/adb.exe'
+    # [Other] Use you own latest ADB, but not the ADB in your emulator
+    AdbExecutable: /usr/bin/adb
+    # 把 which adb 得到的地址替换这里
+```
 
 ---
 
